@@ -1,14 +1,14 @@
 <template>
-  <el-header height="60px">
+  <el-header>
     <!--img src="../../assets/TJLogo.png" width=40px height=40px style="position: relative;top:10px"-->
     <span class="heading">同济大学实验教学管理系统</span>
     <span style="margin-top: 15px;">
-        <el-input placeholder="请输入搜索内容..." v-model="input4" style="width:20%;position:relative;left:800px;bottom: 2px">
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <el-input placeholder="请输入搜索内容..." v-model="input4" style="width:20%;position:relative;left:800px;bottom:5px">
+        <!--i slot="prefix" class="el-input__icon el-icon-search"-->
         </el-input>
       </span>
     <span class="demo-type">
-        <el-button circle @click="jumpToUserInfo" icon="el-icon-user-solid">
+        <el-button circle @click="jumpToUserInfo" :icon="el-icon-user-solid">
         </el-button>
         <el-button circle @click="logout" icon="el-icon-switch-button">
         </el-button>
@@ -27,19 +27,19 @@
             @select="changeWindow">
             <el-menu-item index="1">
               <i class="el-icon-location"></i>
-              <span slot="title">首页</span>
+              <span>首页</span>
             </el-menu-item>
             <el-menu-item index="2">
               <i class="el-icon-menu"></i>
-              <span slot="title">实验中心</span>
+              <span>实验中心</span>
             </el-menu-item>
             <el-menu-item index="3">
               <i class="el-icon-document"></i>
-              <span slot="title">成绩中心</span>
+              <span>成绩中心</span>
             </el-menu-item>
             <el-menu-item index="4">
               <i class="el-icon-setting"></i>
-              <span slot="title">师生互动</span>
+              <span>师生互动</span>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -118,7 +118,7 @@ body{
 .demo-type{
   position:relative;
   left:820px;
-  bottom:2px
+  bottom:5px
 }
 .el-header {
   border-bottom: 1px solid;
