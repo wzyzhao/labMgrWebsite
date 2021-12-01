@@ -2,16 +2,8 @@
   <el-header>
     <!--img src="../../assets/TJLogo.png" width=40px height=40px style="position: relative;top:10px"-->
     <span class="heading">同济大学实验教学管理系统</span>
-    <span style="margin-top: 15px;">
-        <el-input placeholder="请输入搜索内容..." v-model="input4" style="width:20%;position:relative;left:800px;bottom:2px">
-        <!--i slot="prefix" class="el-input__icon el-icon-search"-->
-        </el-input>
-      </span>
     <span class="demo-type">
-        <el-button title="点击进入个人信息页面" circle @click="jumpToUserInfo" style="position: relative;left: 15px">
-          <el-icon><avatar /></el-icon>
-        </el-button>
-        <el-button title="退出登录" circle @click="logout" style="position: relative;left: 30px">
+        <el-button title="退出登录" circle @click="logout" style="position: relative;left: 376px">
           <el-icon><switch-button /></el-icon>
         </el-button>
       </span>
@@ -21,27 +13,23 @@
       <el-row class="tac">
         <el-col :span="12">
           <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b"
-            @select="changeWindow">
+              default-active="2"
+              class="el-menu-vertical-demo"
+              background-color="#545c64"
+              text-color="#fff"
+              active-text-color="#ffd04b"
+              @select="changeWindow">
             <el-menu-item index="1">
-              <el-icon class="menu" color="#FFFF00"><Menu /></el-icon>
-              <span style="position: relative;left:50px">首页</span>
+              <el-icon class="menu"><setting /></el-icon>
+              <span class="menu">个人资料设置</span>
             </el-menu-item>
             <el-menu-item index="2">
-              <el-icon class="menu"><document /></el-icon>
-              <span class="menu">实验中心</span>
+              <el-icon class="menu"><setting /></el-icon>
+              <span class="menu">个人头像设置</span>
             </el-menu-item>
             <el-menu-item index="3">
-              <el-icon class="menu"><Link /></el-icon>
-              <span class="menu">成绩中心</span>
-            </el-menu-item>
-            <el-menu-item index="4">
-              <el-icon class="menu"><chat-line-round /></el-icon>
-              <span class="menu">师生互动</span>
+              <el-icon class="menu"><refresh /></el-icon>
+              <span class="menu">登录密码重置</span>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -49,25 +37,19 @@
     </el-aside>
     <el-container>
       <el-main>
-        <AppIndex v-if="this.choice === 1"></AppIndex>
-        <ExperimentCenter v-if="this.choice === 2"></ExperimentCenter>
+        <UserProfile v-if="this.choice === 1"></UserProfile>
+        <UserAvatar v-if="this.choice === 2"></UserAvatar>
+        <UserPasswordSetting v-if="this.choice === 3"></UserPasswordSetting>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import ExperimentCenter from "../components/ExperimentCenter";
-import AppIndex from "../components/AppIndex";
-import {SwitchButton,Avatar,Menu,ChatLineRound,Document,Link} from "@element-plus/icons";
+import {SwitchButton,Refresh,Setting} from "@element-plus/icons";
 
 export default {
-  components: { AppIndex,ExperimentCenter,SwitchButton,Avatar,Menu,ChatLineRound,Document,Link },
-  data(){
-    return {
-      choice: 1,
-    };
-  },
+  components: {SwitchButton, Refresh, Setting},
   methods: {
     changeWindow(index, indexPath) {
       console.log(1, indexPath);
@@ -82,29 +64,20 @@ export default {
         case "3":
           this.choice = 3;
           break;
-        case "4":
-          this.choice = 4;
-          break;
         case "0":
           this.$router.push("/");
           break;
       }
-    },
-    jumpToUserInfo()
-    {
-      this.$router.push({path: '/userInformation'})
-    },
-    logout(){
-
     }
-
   }
 }
 </script>
 
 <style scoped>
-html,
-body{
+.el-menu-vertical-demo{
+  height: 100vh;
+}
+html, body{
   /*设置内部填充为0，几个布局元素之间没有间距*/
   padding: 0px;
   /*外部间距也是如此设置*/
@@ -149,7 +122,7 @@ body{
 }
 .menu{
   position: relative;
-  left:37px
+  left:25px
 }
 
 /*菜单栏展开收起*/
@@ -158,7 +131,4 @@ body{
   min-height: 400px;
 }
 
-.el-menu-vertical-demo{
-  height: 100vh;
-}
 </style>

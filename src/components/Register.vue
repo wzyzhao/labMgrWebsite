@@ -11,7 +11,7 @@
 
     <el-form-item label="验证码" class="cd" style="position:relative;right:20px">
         <el-input v-model="formData.code">
-          <el-button slot="append" type="primary" @click="getCode" style="position:relative">获取验证码</el-button>
+          <el-button type="primary" @click="getCode" style="position:relative">获取验证码</el-button>
         </el-input>
     </el-form-item>
 

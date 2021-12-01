@@ -1,7 +1,7 @@
 <template>
   <span>
     <el-breadcrumb separator-class="el-icon-arrow-right" style="position:relative;left:220px;bottom:730px">
-        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/student' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/userInfo' }">个人信息</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/userPassWordSetting' }">登录密码重置</el-breadcrumb-item>
     </el-breadcrumb>

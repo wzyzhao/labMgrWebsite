@@ -1,6 +1,6 @@
 <template>
-      <el-breadcrumb separator-class="el-icon-arrow-right" style="position:relative;left:220px;bottom:670px">
-        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb separator-icon="ArrowRight" style="position:relative;left:220px;bottom:670px">
+        <el-breadcrumb-item :to="{ path: '/student' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/experimentCenter' }">实验中心</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="etitle">独立方案评价指标计算</div>

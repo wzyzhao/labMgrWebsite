@@ -4,7 +4,7 @@
 
     <el-row type="flex" justify="center">
 
-    <el-form class="login-container" ref="formName" :model="formData" :rules="rules" label-width="80px" @keyup.enter.native="login()">
+    <el-form class="login-container" ref="formName" :model="formData" :rules="rules" label-width="80px" @keyup.enter="login()">
 
     <h3 class="login_title">用户登录</h3>
 
@@ -17,10 +17,6 @@
       <el-input v-model="formData.password" prefix-icon="el-icon-edit" placeholder="请输入密码" type="password" show-password clearable>
       </el-input>
     </el-form-item>
-
-    <!--el-checkbox class="login_remember" v-model="checked" label-position="left">
-      <span style="color: #505458">记住密码</span>
-    </el-checkbox-->
 
     <el-form-item>
       <el-button type="primary" class="btn" @click="login()" icon="el-icon-upload">登录</el-button>
