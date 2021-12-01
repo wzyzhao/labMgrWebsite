@@ -13,7 +13,6 @@
       <el-row class="tac">
         <el-col :span="12">
           <el-menu
-              default-active="2"
               class="el-menu-vertical-demo"
               background-color="#545c64"
               text-color="#fff"
@@ -31,6 +30,10 @@
               <el-icon class="menu"><refresh /></el-icon>
               <span class="menu">登录密码重置</span>
             </el-menu-item>
+            <el-menu-item index="4">
+            <el-icon class="menu"><back /></el-icon>
+            <span class="menu" style="position: relative;left:40px">返回首页</span>
+            </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
@@ -40,16 +43,26 @@
         <UserProfile v-if="this.choice === 1"></UserProfile>
         <UserAvatar v-if="this.choice === 2"></UserAvatar>
         <UserPasswordSetting v-if="this.choice === 3"></UserPasswordSetting>
+        <Student v-if="this.choice === 4"></Student>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import {SwitchButton,Refresh,Setting} from "@element-plus/icons";
+import {SwitchButton,Refresh,Setting,Back} from "@element-plus/icons";
+import UserProfile from "@/components/UserInfo/UserProfile";
+import UserAvatar from "@/components/UserInfo/UserAvatar";
+import UserPasswordSetting from "@/components/UserInfo/UserPasswordSetting";
+import Student from "@/views/Student";
 
 export default {
-  components: {SwitchButton, Refresh, Setting},
+  components: { SwitchButton, Refresh, Setting, Back, UserProfile, UserAvatar, UserPasswordSetting, Student},
+  data(){
+    return {
+      choice: 1,
+    };
+  },
   methods: {
     changeWindow(index, indexPath) {
       console.log(1, indexPath);
@@ -64,8 +77,8 @@ export default {
         case "3":
           this.choice = 3;
           break;
-        case "0":
-          this.$router.push("/");
+        case "4":
+          this.$router.push("/student");
           break;
       }
     }

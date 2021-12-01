@@ -1,8 +1,4 @@
 <template>
-  <el-breadcrumb :separator-icon="ArrowRight">
-    <el-breadcrumb-item :to="{ path: '/student' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/experimentCenter' }">实验中心</el-breadcrumb-item>
-  </el-breadcrumb>
   <div class="etitle">独立方案评价指标计算</div>
   <el-table
       :data="tableData"
@@ -162,11 +158,11 @@ html, body
   font-size:20px;
   font-family: "Times New Roman", Times, serif;
   position: relative;
-  left:40px
+  left:20px
 }
 .etable{
   width: 100% ;
   position:relative;
-  left:50px;
+  left:30px;
 }
 </style>
