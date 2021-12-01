@@ -35,7 +35,7 @@ export default {
       tableData: [
         {
           date: '2021-11-03',
-          reportName: '独立方案评价指标计算',
+          reportName: '独立方案评价指标计算实验',
           completionState: '完成',
           address: '济事楼000',
           finalScore: 'A+',
