@@ -21,7 +21,6 @@
       <el-row class="tac">
         <el-col :span="12">
           <el-menu
-            default-active="2"
             class="el-menu-vertical-demo"
             background-color="#545c64"
             text-color="#fff"
@@ -57,8 +56,8 @@
 </template>
 
 <script>
-import ExperimentCenter from "../components/ExperimentCenter";
-import AppIndex from "../components/AppIndex";
+import ExperimentCenter from "../components/Student/ExperimentCenter";
+import AppIndex from "../components/Student/AppIndex";
 import {SwitchButton,Avatar,Menu,ChatLineRound,Document,Link} from "@element-plus/icons";
 
 export default {
