@@ -51,6 +51,7 @@
         <AppIndex v-if="this.choice === 1"></AppIndex>
         <ExperimentCenter v-if="this.choice === 2"></ExperimentCenter>
         <ScoreCenter v-if="this.choice === 3"></ScoreCenter>
+        <Interaction v-if="this.choice === 4"></Interaction>
       </el-main>
     </el-container>
   </el-container>
@@ -59,11 +60,12 @@
 <script>
 import ExperimentCenter from "../components/Student/ExperimentCenter";
 import ScoreCenter from "../components/Student/ScoreCenter";
+import Interaction from "@/components/Student/Interaction";
 import AppIndex from "../components/Student/AppIndex";
 import {SwitchButton,Avatar,Menu,ChatLineRound,Document,Link} from "@element-plus/icons";
 
 export default {
-  components: { AppIndex,ExperimentCenter,ScoreCenter,SwitchButton,Avatar,Menu,ChatLineRound,Document,Link },
+  components: { AppIndex,ExperimentCenter,ScoreCenter,Interaction,SwitchButton,Avatar,Menu,ChatLineRound,Document,Link },
   data(){
     return {
       choice: 1,
