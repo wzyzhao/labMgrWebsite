@@ -5,7 +5,7 @@
         <el-breadcrumb-item :to="{ path: '/userInfo' }">个人信息</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/userPassWordSetting' }">登录密码重置</el-breadcrumb-item>
     </el-breadcrumb>
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="70px" size="medium" style="position:relative;left:620px;right:230px;bottom:650px">
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="70px" size="medium" style="position:relative;left:620px;right:230px">
            <el-form-item label="旧密码" prop="oldPass">
             <el-input placeholder="请输入旧密码" style="width: 300px;position:relative;right:570px;" type="password" v-model="ruleForm.oldPass" autocomplete="off">></el-input>
           </el-form-item>

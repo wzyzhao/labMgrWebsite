@@ -1,11 +1,11 @@
 <template>
     <div>
-      <el-breadcrumb separator-class="el-icon-arrow-right" style="position:relative;left:220px;bottom:730px">
+      <el-breadcrumb separator-class="el-icon-arrow-right" style="position:relative;left:220px;">
         <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/userInfo' }">个人信息</el-breadcrumb-item>
         <el-breadcrumb-item :to="{ path: '/userProfile' }">个人资料设置</el-breadcrumb-item>
       </el-breadcrumb>
-    <el-form ref="form" :model="sizeForm" label-width="80px" size="medium" style="position:relative;left:230px;right:230px;bottom:300px">
+    <el-form ref="form" :model="sizeForm" label-width="80px" size="medium" style="position:relative;left:230px;right:230px;">
         <el-form-item label="1">
           <el-input style="width: 100px" v-model="sizeForm.name"></el-input>
         </el-form-item>

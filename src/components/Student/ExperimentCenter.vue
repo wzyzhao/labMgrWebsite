@@ -162,13 +162,11 @@ html, body
   font-size:20px;
   font-family: "Times New Roman", Times, serif;
   position: relative;
-  bottom:650px;
   left:40px
 }
 .etable{
   width: 100% ;
   position:relative;
-  left:230px;
-  bottom:610px
+  left:50px;
 }
 </style>

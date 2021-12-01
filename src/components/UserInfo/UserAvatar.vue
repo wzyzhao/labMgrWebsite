@@ -5,9 +5,9 @@
       <el-breadcrumb-item :to="{ path: '/userInfo' }">个人信息</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/userAvatar' }">个人头像设置</el-breadcrumb-item>
     </el-breadcrumb>
-    <div style="position: relative;left:250px;bottom:600px;">设置头像</div>
-    <div style="position: relative;left:250px;bottom:550px;">如果您还没有设置自己的头像，系统会显示为默认头像，您需要自己上传一张新照片来作为自己的个人头像</div>
-    <div style="position: relative;bottom:250px;">当前头像</div>
+    <div style="position: relative;left:250px;">设置头像</div>
+    <div style="position: relative;left:250px;">如果您还没有设置自己的头像，系统会显示为默认头像，您需要自己上传一张新照片来作为自己的个人头像</div>
+    <div style="position: relative;">当前头像</div>
     <img>
   <el-upload
     class="upload-demo"
