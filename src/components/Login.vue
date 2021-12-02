@@ -25,7 +25,9 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button type="primary" class="btn" @click="login()" icon="el-icon-upload">登录</el-button>
+      <el-button type="primary" class="btn" @click="login()" icon="el-icon-upload">
+        <el-icon style="position: relative;right: 15px;" size="15"><upload-filled /></el-icon>
+        <span style="position: relative;right: 10px;">登录</span></el-button>
       <el-button class="btn" @click="resetForm">重置</el-button>
     </el-form-item>
 
@@ -41,11 +43,11 @@
 
 <script>
 import axios from 'axios'
-import {Edit} from "@element-plus/icons";
+import {Edit,UploadFilled} from "@element-plus/icons";
 axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
 
 export default {
-  components:{Edit},
+  components:{Edit,UploadFilled},
   data () {
     return {
       formData: {
@@ -133,7 +135,7 @@ body{
 }
 .btn{
   position:relative;
-  right:48px;
+  right:47px;
   top:10px
 }
 </style>
