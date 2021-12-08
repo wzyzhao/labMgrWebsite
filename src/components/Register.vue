@@ -5,33 +5,50 @@
     <h3 class="login_title">用户注册</h3>
 
     <el-form-item label="邮箱" class="em" style="position:relative;right:20px">
-        <el-input placeholder="请输入邮箱" prefix-icon="el-icon-edit" v-model="formData.email" class="input-with-select">
+        <el-input placeholder="请输入邮箱" v-model="formData.email" clearable>
+          <template #prefix>
+            <el-icon class="el-input__icon"><edit /></el-icon>
+          </template>
         </el-input>
     </el-form-item>
 
     <el-form-item label="验证码" class="cd" style="position:relative;right:20px">
         <el-input v-model="formData.code">
-          <el-button type="primary" @click="getCode" style="position:relative">获取验证码</el-button>
+          <template #append>
+            <el-button type="primary" @click="getCode">获取验证码</el-button>
+          </template>
         </el-input>
     </el-form-item>
 
-    <el-form-item label="输入学号" class="em" style="position:relative;right:20px">
+    <el-form-item label="学号" class="em" style="position:relative;right:20px">
       <el-input placeholder="请输入学号" v-model="formData.id" class="input-with-select">
+        <template #prefix>
+          <el-icon class="el-input__icon"><edit /></el-icon>
+        </template>
       </el-input>
     </el-form-item>
 
-    <el-form-item label="输入姓名" class="em" style="position:relative;right:20px">
+    <el-form-item label="姓名" class="em" style="position:relative;right:20px">
       <el-input placeholder="请输入姓名" v-model="formData.username" class="input-with-select">
+        <template #prefix>
+          <el-icon class="el-input__icon"><edit /></el-icon>
+        </template>
       </el-input>
     </el-form-item>
 
-    <el-form-item label="输入密码" class="em" style="position:relative;right:20px">
+    <el-form-item label="密码" class="em" style="position:relative;right:20px">
         <el-input placeholder="请输入密码" v-model="formData.password" class="input-with-select" type="password" show-password clearable>
+          <template #prefix>
+            <el-icon class="el-input__icon"><edit /></el-icon>
+          </template>
         </el-input>
     </el-form-item>
 
     <el-form-item label="确认密码" class="em" style="position:relative;right:20px">
         <el-input placeholder="请确认密码" v-model="formData.verifyPassword" class="input-with-select" type="password" show-password clearable>
+          <template #prefix>
+            <el-icon class="el-input__icon"><edit /></el-icon>
+          </template>
         </el-input>
     </el-form-item>
 
@@ -46,9 +63,11 @@
 
 <script>
 import axios from 'axios'
+import {Edit} from "@element-plus/icons"
 axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
 //axios.defaults.headers.post['Content-Type'] = "multipart/form-data"
 export default {
+  components:{Edit},
   data () {
     let id;
     return {
@@ -146,7 +165,6 @@ export default {
 }
 .btn{
   position:relative;
-  right:20px
 }
 </style>
 

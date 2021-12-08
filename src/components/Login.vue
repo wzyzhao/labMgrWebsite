@@ -11,17 +11,25 @@
     <h3 class="login_title">用户登录</h3>
 
     <el-form-item prop="email" label="邮箱" style="position:relative;right:20px">
-      <el-input v-model="formData.email" prefix-icon="el-icon-edit" placeholder="请输入邮箱" clearable>
+      <el-input v-model="formData.email" placeholder="请输入邮箱" clearable>
+        <template #prefix>
+          <el-icon class="el-input__icon"><edit /></el-icon>
+        </template>
       </el-input>
     </el-form-item>
 
     <el-form-item prop="password" label="密码" style="position:relative;right:20px">
-      <el-input v-model="formData.password" prefix-icon="el-icon-edit" placeholder="请输入密码" type="password" show-password clearable>
+      <el-input v-model="formData.password" placeholder="请输入密码" type="password" show-password clearable>
+        <template #prefix>
+          <el-icon class="el-input__icon"><edit /></el-icon>
+        </template>
       </el-input>
     </el-form-item>
 
     <el-form-item>
-      <el-button type="primary" class="btn" @click="login()" icon="el-icon-upload">登录</el-button>
+      <el-button type="primary" class="btn" @click="login()" icon="el-icon-upload">
+        <el-icon style="position: relative;right: 15px;" size="15"><upload-filled /></el-icon>
+        <span style="position: relative;right: 10px;">登录</span></el-button>
       <el-button class="btn" @click="resetForm">重置</el-button>
     </el-form-item>
 
@@ -37,10 +45,11 @@
 
 <script>
 import axios from 'axios'
+import {Edit,UploadFilled} from "@element-plus/icons";
 axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
 
 export default {
-  name: 'Login',
+  components:{Edit,UploadFilled},
   data () {
     return {
       formData: {
@@ -133,7 +142,7 @@ body{
 }
 .btn{
   position:relative;
-  right:48px;
+  right:47px;
   top:10px
 }
 </style>
