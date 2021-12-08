@@ -30,7 +30,7 @@
           ></el-date-picker>
         </el-form-item>
       </el-col>
-      <el-col class="line" :span="2">-</el-col>
+      <el-col class="line" :span="5">-</el-col>
       <el-col :span="11">
         <el-form-item prop="date2">
           <el-time-picker
@@ -117,14 +117,6 @@ export default {
             type: 'date',
             required: true,
             message: 'Please pick a time',
-            trigger: 'change',
-          },
-        ],
-        type: [
-          {
-            type: 'array',
-            required: true,
-            message: 'Please select at least one activity type',
             trigger: 'change',
           },
         ],

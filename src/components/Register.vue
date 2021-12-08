@@ -1,6 +1,6 @@
 <template>
   <body id="post">
-  <el-form class="login-container" ref="form" :model="formData" label-width="80px">
+  <el-form class="register-container" ref="form" :model="formData" label-width="80px">
 
     <h3 class="login_title">用户注册</h3>
 
@@ -128,7 +128,7 @@ export default {
   background-size: cover;
   position: fixed;
 }
-.login-container {
+.register-container {
   border-radius: 15px;
   background-clip: padding-box;
   margin: 90px auto;

@@ -6,6 +6,8 @@
 
     <el-form class="login-container" ref="formName" :model="formData" :rules="rules" label-width="80px" @keyup.enter="login()">
 
+
+
     <h3 class="login_title">用户登录</h3>
 
     <el-form-item prop="email" label="邮箱" style="position:relative;right:20px">
@@ -45,7 +47,8 @@ export default {
         email: '',
         password: '',
         id: null,
-        username: ''
+        username: '',
+        active: 0
       },
       rules: {
         email: [{required: true, message: '邮箱不能为空', trigger: 'blur'}],
@@ -53,6 +56,7 @@ export default {
       }
     }
   },
+
   methods: {
     login () {
       this.$axios
@@ -90,6 +94,9 @@ export default {
     },
     resetForm () {
       this.$refs.formName.resetFields()
+    },
+    next() {
+      if (this.active++ > 2) this.active = 0
     }
   }
 }
