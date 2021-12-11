@@ -1,55 +1,89 @@
 <template>
+    <el-descriptions
+        class="margin-top"
+        title="用户个人信息"
+        :column="3"
+        border
+    >
+      <template #extra>
+        <el-button type="primary" size="small">Operation</el-button>
+      </template>
+      <el-descriptions-item align="center" width="100px">
+        <template #label>
+          <el-icon><user /></el-icon>
+          姓名
+        </template>
+        1
+      </el-descriptions-item>
+      <el-descriptions-item align="center" width="100px">
+        <template #label>
+          <el-icon><user /></el-icon>
+          年级
+        </template>
+        1
+      </el-descriptions-item>
+      <el-descriptions-item align="center" width="100px">
+        <template #label>
+          <el-icon><tickets /></el-icon>
+          性别
+        </template>
+        男
+      </el-descriptions-item>
+      <el-descriptions-item align="center">
+        <template #label>
+          <el-icon><tickets /></el-icon>
+          用户类别
+        </template>
+        <el-tag size="small">学生</el-tag>
+      </el-descriptions-item>
+      <el-descriptions-item align="center">
+        <template #label>
+          <el-icon><iphone /></el-icon>
+          电话号码
+        </template>
+        <el-input v-model="telephone" placeholder="Please input">
+          <template #prepend>+86</template>
+        </el-input>
+      </el-descriptions-item>
+    </el-descriptions>
+  <el-descriptions
+      :column="2"
+      border
+  >
+    <el-descriptions-item align="center" width="213px">
+      <template #label>
+        <el-icon><location /></el-icon>
+        常用地址
+      </template>
+      <el-icon><position /></el-icon>
+    </el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions
+      direction="vertical"
+      :column="3"
+      border
+  >
+    <el-descriptions-item icon="position" align="center">
+      <template #label>
+        <el-icon><tickets /></el-icon>
+        个人简介
+      </template>
+      <el-input
+          v-model="personalProfile"
+          maxlength="200"
+          placeholder="请输入个人简介，不超过200字"
+          show-word-limit
+          type="textarea"
+          rows=10
+      />
+    </el-descriptions-item>
+  </el-descriptions>
   <el-form
       ref="ruleForm"
-      :model="ruleForm"
-      :rules="rules"
       label-width="120px"
       class="demo-ruleForm"
+      style="position: relative;right:80px;top:30px"
   >
-    <el-form-item label="反馈主题" prop="title">
-      <el-input v-model="ruleForm.name"></el-input>
-    </el-form-item>
-
-    <el-form-item label="反馈类型" prop="feedbackType">
-      <el-select position="left" v-model="ruleForm.feedbackType" placeholder="请选择反馈类型">
-        <el-option label="实验改进" value="1"></el-option>
-        <el-option label="成绩复合" value="2"></el-option>
-        <el-option label="设备故障申报" value="3"></el-option>
-        <el-option label="问题咨询" value="4"></el-option>
-      </el-select>
-    </el-form-item>
-
-    <el-form-item label="时间选择" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker
-              v-model="ruleForm.date1"
-              type="date"
-              placeholder="日期"
-              style="width: 100%"
-          ></el-date-picker>
-        </el-form-item>
-      </el-col>
-      <el-col class="line" :span="5">-</el-col>
-      <el-col :span="11">
-        <el-form-item prop="date2">
-          <el-time-picker
-              v-model="ruleForm.date2"
-              placeholder="时间"
-              style="width: 100%"
-          ></el-time-picker>
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-
-    <el-form-item label="选择" prop="delivery">
-      <el-switch v-model="ruleForm.delivery" active-color="#13ce66"></el-switch>
-    </el-form-item>
-
-    <el-form-item label="个人简介" prop="personalInfo">
-      <el-input v-model="ruleForm.personalInfo" type="textarea"></el-input>
-    </el-form-item>
-
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')"
       >提交</el-button
@@ -61,78 +95,18 @@
 </template>
 
 <script scoped>
+import {User, Iphone, Location, Tickets, Position} from '@element-plus/icons'
 export default {
+  components:{User, Iphone, Location, Tickets,Position},
   data() {
     return {
-      ruleForm: {
-        title: '',
-        feedbackType: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        personalInfo: '',
-      },
-      rules: {
-        title: [
-          {
-            required: true,
-            message: '请输入主题',
-            trigger: 'blur',
-          },
-          {
-            min: 3,
-            max: 5,
-            message: 'Length should be 3 to 5',
-            trigger: 'blur',
-          },
-        ],
-        feedbackType: [
-          {
-            required: true,
-            message: '请选择反馈的类别',
-            trigger: 'change',
-          },
-        ],
-        date1: [
-          {
-            type: 'date',
-            required: true,
-            message: 'Please pick a date',
-            trigger: 'change',
-          },
-        ],
-        date2: [
-          {
-            type: 'date',
-            required: true,
-            message: 'Please pick a time',
-            trigger: 'change',
-          },
-        ],
-        personalInfo: [
-          {
-            required: true,
-            message: '请输入个人简介',
-            trigger: 'blur',
-          },
-        ],
-      },
+      telephone:'',
+      personalProfile:''
     }
   },
   methods: {
-    submitForm(formName) {
-      /*
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-       */
+  submitForm() {
+
     },
     resetForm(formName) {
       //this.$refs[formName].resetFields()

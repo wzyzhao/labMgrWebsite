@@ -14,6 +14,7 @@
     "element-plus": "^1.2.0-beta.5",
     "eslint-plugin-standard": "^5.0.0",
     "vue": "^3.0.0",
+    "vue-amap": "^0.5.10",
     "vue-axios": "^3.4.0",
     "vue-router": "^4.0.12"
   },
@@ -24,7 +25,8 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "js-base64": "^3.7.2"
   },
   "description": "## Project setup ``` npm install ```",
   "main": "index.js",
