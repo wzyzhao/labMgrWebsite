@@ -1,5 +1,4 @@
 <template>
-
   <el-row gutter="20">
 
     <el-col span="10">
@@ -12,7 +11,7 @@
           <span>独立方案评价指标实验</span>
           <div class="bottom">
             <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button" onclick="">填写报告</el-button>
+            <el-button type="text" class="button" @click="jumpToReportOne">填写报告</el-button>
           </div>
         </div>
       </el-card>
@@ -75,15 +74,23 @@
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
+
   setup() {
     const currentDate = ref(new Date())
 
     return {
       currentDate,
+
     }
   },
-  data(){
-    //imgUrl:require('../../assets/img/bg/experimentBG.jpeg')
+
+  data() {
+
+  },
+  methods: {
+    jumpToReportOne() {
+      this.$router.push("/reportOne");
+    }
   }
 })
 </script>
@@ -112,3 +119,4 @@ export default defineComponent({
   display: block;
 }
 </style>
+
