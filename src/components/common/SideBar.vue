@@ -29,7 +29,7 @@
         </el-col>
       </el-row>
     </el-aside>
-    <el-container style="height: 500px; border: 1px solid #eee">
+    <el-container style="height: 100vh; border: 1px solid #eee">
       <el-main>
         <AppIndex v-if="this.choice === 1"></AppIndex>
         <ExperimentHome v-if="this.choice === 2"></ExperimentHome>

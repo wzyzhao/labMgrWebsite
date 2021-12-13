@@ -1,7 +1,8 @@
 <template>
 
-  <el-row>
+  <el-row gutter="20">
 
+    <el-col span="10">
       <el-card shadow="hover" :body-style="{ padding: '10px' }">
         <img
             src="../../assets/img/bg/experiment1BG.png"
@@ -15,8 +16,9 @@
           </div>
         </div>
       </el-card>
+    </el-col>
 
-
+    <el-col span="10">
     <el-card shadow="hover" :body-style="{ padding: '0px' }">
       <img
           src="../../assets/img/bg/experiment1BG.png"
@@ -30,7 +32,9 @@
         </div>
       </div>
     </el-card>
+    </el-col>
 
+    <el-col span="10">
     <el-card shadow="hover" :body-style="{ padding: '0px' }">
       <img
           src="../../assets/img/bg/experiment1BG.png"
@@ -44,9 +48,9 @@
         </div>
       </div>
     </el-card>
+    </el-col>
 
-
-
+    <el-col span="10">
     <el-card shadow="hover" :body-style="{ padding: '0px' }">
       <img
           src="../../assets/img/bg/experiment1BG.png"
@@ -60,7 +64,7 @@
         </div>
       </div>
     </el-card>
-
+    </el-col>
 
 
   </el-row>
