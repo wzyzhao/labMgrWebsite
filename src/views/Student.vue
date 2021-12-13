@@ -1,6 +1,7 @@
 <template>
   <Header></Header>
-  <SideBar></SideBar>
+  <SideBar>
+  </SideBar>
 </template>
 
 <script>

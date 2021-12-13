@@ -7,7 +7,7 @@ import UserInformation from "@/views/UserInformation";
 import Teacher from "@/views/Teacher";
 import CCTeacher from "@/views/CCTeacher";
 import Assistant from "@/views/Assistant";
-
+import ReportOne from '../components/Student/ReportOne'
 const routes = [
     // 下面都是固定的写法
     {
@@ -49,6 +49,11 @@ const routes = [
       path: '/userInformation',
       name: 'UserInformation',
       component: UserInformation
+    },
+    {
+        path: '/reportOne',
+        name: 'reportOne',
+        component: ReportOne
     },
   ]
 
