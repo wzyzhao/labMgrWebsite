@@ -3,7 +3,7 @@
   <el-row gutter="20">
 
     <el-col span="10">
-      <el-card shadow="hover" :body-style="{ padding: '10px' }">
+      <el-card shadow="hover" :body-style="{ padding: '0px' }">
         <img
             src="../../assets/img/bg/experiment1BG.png"
             class="image"
