@@ -15,15 +15,19 @@
             </el-menu-item>
             <el-menu-item index="2">
               <el-icon class="menu"><document /></el-icon>
-              <span class="menu">实验中心</span>
+              <span class="menu">班级管理</span>
             </el-menu-item>
             <el-menu-item index="3">
-              <el-icon class="menu"><Link /></el-icon>
-              <span class="menu">成绩中心</span>
+              <el-icon class="menu"><document /></el-icon>
+              <span class="menu">实验中心</span>
             </el-menu-item>
             <el-menu-item index="4">
+              <el-icon class="menu"><Link /></el-icon>
+              <span class="menu">成绩管理</span>
+            </el-menu-item>
+            <el-menu-item index="5">
               <el-icon class="menu"><chat-line-round /></el-icon>
-              <span class="menu">师生互动</span>
+              <span class="menu">公告中心</span>
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -31,10 +35,11 @@
     </el-aside>
     <el-container style="height: 100vh; border: 1px solid #eee">
       <el-main>
-        <AppIndex v-if="this.choice === 1"></AppIndex>
-        <ExperimentHome v-if="this.choice === 2"></ExperimentHome>
-        <ScoreCenter v-if="this.choice === 3"></ScoreCenter>
-        <Interaction v-if="this.choice === 4"></Interaction>
+        <CCTeacherIndex v-if="this.choice === 1"></CCTeacherIndex>
+        <ClassManage v-if="this.choice === 2"></ClassManage>
+        <ExperimentCenterCCTeacher v-if="this.choice === 3"></ExperimentCenterCCTeacher>
+        <ScoreManage v-if="this.choice === 4"></ScoreManage>
+        <Billboard v-if="this.choice === 5"></Billboard>
       </el-main>
     </el-container>
   </el-container>
@@ -42,14 +47,15 @@
 
 <script>
 
-
-import ScoreCenter from "@/components/Student/ScoreCenter";
-import AppIndex from "@/components/Student/AppIndex";
-import Interaction from "@/components/Student/Interaction";
-import ExperimentHome from "@/components/Student/ExperimentHome";
 import {Menu,ChatLineRound,Document,Link} from "@element-plus/icons";
+import ClassManage from "@/components/CCTeacher/ClassManage";
+import CCTeacherIndex from "@/components/CCTeacher/CCTeacherIndex";
+import Billboard from "@/components/CCTeacher/Billboard";
+import ScoreManage from "@/components/CCTeacher/ScoreManage";
+import ExperimentCenterCCTeacher from "@/components/CCTeacher/ExperimentCenterCCTeacher";
+
 export default {
-  components: { AppIndex,ScoreCenter,Interaction,ExperimentHome,Menu,ChatLineRound,Document,Link },
+  components: {ExperimentCenterCCTeacher, CCTeacherIndex,Billboard,ClassManage,ScoreManage,Menu,ChatLineRound,Document,Link },
   data(){
     return{
       choice: 1,
@@ -72,6 +78,9 @@ export default {
           break;
         case "4":
           this.choice = 4;
+          break;
+        case "5":
+          this.choice = 5;
           break;
         case "0":
           this.$router.push("/");
