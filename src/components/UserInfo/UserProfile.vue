@@ -6,7 +6,7 @@
         border
     >
       <template #extra>
-        <el-button type="primary" size="small">Operation</el-button>
+        <el-button type="primary" size="small">退出编辑</el-button>
       </template>
       <el-descriptions-item align="center" width="100px">
         <template #label>
@@ -41,7 +41,7 @@
           <el-icon><iphone /></el-icon>
           电话号码
         </template>
-        <el-input v-model="telephone" placeholder="Please input">
+        <el-input v-model="dataForm.telephone" placeholder="Please input" class="items">
           <template #prepend>+86</template>
         </el-input>
       </el-descriptions-item>
@@ -69,7 +69,7 @@
         个人简介
       </template>
       <el-input
-          v-model="personalProfile"
+          v-model="dataForm.personalProfile"
           maxlength="200"
           placeholder="请输入个人简介，不超过200字"
           show-word-limit
@@ -88,7 +88,7 @@
       <el-button type="primary" @click="submitForm('ruleForm')"
       >提交</el-button
       >
-      <el-button @click="resetForm('ruleForm')">取消</el-button>
+      <el-button @click="resetForm('dataForm')">重置</el-button>
     </el-form-item>
 
   </el-form>
@@ -100,16 +100,18 @@ export default {
   components:{User, Iphone, Location, Tickets,Position},
   data() {
     return {
-      telephone:'',
-      personalProfile:''
+      dataForm:{
+        telephone:'',
+        personalProfile:''
+      }
     }
   },
   methods: {
   submitForm() {
 
     },
-    resetForm(formName) {
-      //this.$refs[formName].resetFields()
+    resetForm() {
+      this.$refs.formName.resetFields()
     },
   },
 }
