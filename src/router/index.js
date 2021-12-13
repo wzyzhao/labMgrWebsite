@@ -4,6 +4,9 @@ import Register from '../components/Register'
 import Login from '../components/Login'
 import Student from "../views/Student";
 import UserInformation from "@/views/UserInformation";
+import Teacher from "@/views/Teacher";
+import CCTeacher from "@/views/CCTeacher";
+import Assistant from "@/views/Assistant";
 
 const routes = [
     // 下面都是固定的写法
@@ -26,6 +29,21 @@ const routes = [
       path: '/student',
       name: 'Student',
       component: Student
+    },
+    {
+        path: '/teacher',
+        name: 'Teacher',
+        component: Teacher
+    },
+    {
+        path: '/ccTeacher',
+        name: 'CCTeacher',
+        component: CCTeacher
+    },
+    {
+        path: '/assistant',
+        name: 'Assistant',
+        component: Assistant
     },
     {
       path: '/userInformation',
