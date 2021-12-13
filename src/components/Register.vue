@@ -20,8 +20,8 @@
         </el-input>
     </el-form-item>
 
-    <el-form-item label="学号" class="em" style="position:relative;right:20px">
-      <el-input placeholder="请输入学号" v-model="formData.id" class="input-with-select">
+    <el-form-item label="ID" class="em" style="position:relative;right:20px">
+      <el-input placeholder="请输入ID" v-model="formData.id" class="input-with-select">
         <template #prefix>
           <el-icon class="el-input__icon"><edit /></el-icon>
         </template>
@@ -34,6 +34,17 @@
           <el-icon class="el-input__icon"><edit /></el-icon>
         </template>
       </el-input>
+    </el-form-item>
+
+    <el-form-item label="身份" class="em" style="position:relative;right:20px">
+      <el-select v-model="value" placeholder="请选择" class="input-with-select">
+        <el-option
+            v-for="item in authority"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </el-form-item>
 
     <el-form-item label="密码" class="em" style="position:relative;right:20px">
@@ -78,7 +89,22 @@ export default {
         password: '',
         code: '',
         verifyPassword: ''
-      }
+
+      },
+      authority: [{
+        value: '1',
+        label: '学生'
+      }, {
+        value: '2',
+        label: '教师'
+      }, {
+        value: '3',
+        label: '责任教师'
+      }, {
+        value: '4',
+        label: '助教'
+      } ],
+      value: ''
     }
   },
   methods: {
@@ -100,6 +126,7 @@ export default {
             email: this.formData.email,
             code: this.formData.code,
             id: parseInt(this.formData.id),
+            authority:this.authority,
             username: this.formData.username,
             password: this.formData.password
           },
@@ -110,7 +137,7 @@ export default {
           //验证码的对应在后端实现了
 
           if ((this.formData.email == '' || this.formData.code == '' || this.formData.password == ''
-            || this.formData.id == null || this.formData.username == '')) {
+            || this.formData.id == null || this.authority == '' || this.formData.username == '')) {
             this.$message({
               message: '必要信息不能为空',
               type: 'error'

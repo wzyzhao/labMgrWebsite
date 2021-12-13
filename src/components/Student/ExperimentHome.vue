@@ -2,27 +2,66 @@
 
   <el-row>
 
-    <el-col
-        v-for="(o, index) in 3"
-        :key="o"
-        :span="6"
-        :offset="index > 0 ? 2 : 0"
-    >
-      <el-card shadow="hover" :body-style="{ padding: '0px' }">
+      <el-card shadow="hover" :body-style="{ padding: '10px' }">
         <img
-            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+            src="../../assets/img/bg/experiment1BG.png"
             class="image"
         />
         <div style="padding: 20px">
-          <span>Yummy hamburger</span>
+          <span>独立方案评价指标实验</span>
           <div class="bottom">
             <time class="time">{{ currentDate }}</time>
-            <el-button type="text" class="button">Operating</el-button>
+            <el-button type="text" class="button" onclick="">填写报告</el-button>
           </div>
         </div>
       </el-card>
 
-    </el-col>
+
+    <el-card shadow="hover" :body-style="{ padding: '0px' }">
+      <img
+          src="../../assets/img/bg/experiment1BG.png"
+          class="image"
+      />
+      <div style="padding: 20px">
+        <span>软件规模度量实验</span>
+        <div class="bottom">
+          <time class="time">{{ currentDate }}</time>
+          <el-button type="text" class="button">填写报告</el-button>
+        </div>
+      </div>
+    </el-card>
+
+    <el-card shadow="hover" :body-style="{ padding: '0px' }">
+      <img
+          src="../../assets/img/bg/experiment1BG.png"
+          class="image"
+      />
+      <div style="padding: 20px">
+        <span>财务分析实验</span>
+        <div class="bottom">
+          <time class="time">{{ currentDate }}</time>
+          <el-button type="text" class="button">填写报告</el-button>
+        </div>
+      </div>
+    </el-card>
+
+
+
+    <el-card shadow="hover" :body-style="{ padding: '0px' }">
+      <img
+          src="../../assets/img/bg/experiment1BG.png"
+          class="image"
+      />
+      <div style="padding: 20px">
+        <span>风险分析实验</span>
+        <div class="bottom">
+          <time class="time">{{ currentDate }}</time>
+          <el-button type="text" class="button">填写报告</el-button>
+        </div>
+      </div>
+    </el-card>
+
+
 
   </el-row>
 
@@ -39,6 +78,9 @@ export default defineComponent({
       currentDate,
     }
   },
+  data(){
+    //imgUrl:require('../../assets/img/bg/experimentBG.jpeg')
+  }
 })
 </script>
 
@@ -62,7 +104,7 @@ export default defineComponent({
 }
 
 .image {
-  width: 100%;
+  width: 70%;
   display: block;
 }
 </style>
