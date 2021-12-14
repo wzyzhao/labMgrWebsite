@@ -462,8 +462,8 @@
               width="150">
           </el-table-column>
         </el-table>
-        <el-button @click="getResult" style="position: relative;top:100px">
-          提交<el-icon class="el-icon--right"><Back /></el-icon>
+        <el-button type="primary" @click="getResult" style="position: relative;top:60px">
+          提交<el-icon class="el-icon--right"><Upload /></el-icon>
         </el-button>
       </el-main>
     </el-container>
@@ -471,77 +471,32 @@
 
 <script>
 import Header from "@/components/common/Header";
-import { Back } from '@element-plus/icons';
+import { Back,Upload } from '@element-plus/icons';
 import axios from "axios";
 export default {
   components: {
-  Back,Header
+  Back,Header,Upload
   },
   data() {
     return {
       showInput: '',
       oldData:{},
       formData:{
-        assistantId : '',
-        cumulative0 : 0,
-        cumulative1 : 0,
-        cumulative2 : 0,
-        cumulative3 : 0,
-        cumulative4 : 0,
-        cumulative5 : 0,
-        cumulative6 : 0,
-        dpp : 0.0,
-        inflow1 : 0,
-        inflow2 : 0,
-        inflow3 : 0,
-        inflow4 : 0,
-        inflow5 : 0,
-        inflow6 : 0,
-        irr : 0.0,
-        netCashFlow0 : 0,
-        netCashFlow1 : 0,
-        netCashFlow2 : 0,
-        netCashFlow3 : 0,
-        netCashFlow4 : 0,
-        netCashFlow5 : 0,
-        netCashFlow6 : 0,
-        npv : 0,
-        outflow0 : 0,
-        outflow1 : 0,
-        outflow2 : 0,
-        outflow3 : 0,
-        outflow4 : 0,
-        outflow5 : 0,
-        outflow6 : 0,
-        presentCumulative0 : 0,
-        presentCumulative1 : 0,
-        presentCumulative2 : 0,
-        presentCumulative3 : 0,
-        presentCumulative4 : 0,
-        presentCumulative5 : 0,
-        presentCumulative6 : 0,
-        presentNetCashFlow0 : 0,
-        presentNetCashFlow1 : 0,
-        presentNetCashFlow2 : 0,
-        presentNetCashFlow3 : 0,
-        presentNetCashFlow4 : 0,
-        presentNetCashFlow5 : 0,
-        presentNetCashFlow6 : 0,
-        reportScore : 0,
         studentId : '',
         teacherId : '',
+        assistantId : '',
+        reportScore : 0
       },
       tableData1: [
         {
-          id:0,
           number: '1',
           year: '现金流入',
           one: '',
-          two: 570,
-          three: 738,
-          four: 913,
-          five: 1097,
-          six: 1289
+          two: '',
+          three: '',
+          four: '',
+          five: '',
+          six: '',
 
         },
     ],
@@ -561,84 +516,120 @@ export default {
           id:1,
           number: '1.2',
           year: '软件运营维护收入',
+          one:'',
+          two:'',
+          three:'',
+          four:'',
+          five:'',
+          six:'',
         },
       ],
        tableData3:[
         {
-          id:0,
+          id:2,
           number: '2',
           year: '现金流出',
-          zero: 1000,
-          one: 500,
-          two: 500,
-          three: 500,
-          four: 500,
-          five: 500,
-          six: 500
+          zero: '',
+          one: '',
+          two: '',
+          three: '',
+          four: '',
+          five: '',
+          six: '',
         },
        ],
       tableData4:[
         {
-          id:0,
+          id:3,
           number: '2.1',
           year: '软件开发成本',
-
+          zero:'',
         },
           ],
       tableData5:[
          {
-           id:0,
+           id:4,
            number: '2.2',
            year: '业务运营费用',
+           zero: '',
+           one: '',
+           two: '',
+           three: '',
+           four: '',
+           five: '',
+           six: '',
          },
           ],
       tableData6:[
         {
-          id:0,
+          id:5,
           number: '3',
           year: '净现金流量',
         },
         {
-          id:1,
+          id:6,
           number: '3.1',
           year: '累计净现金流量',
+          zero: '',
+          one: '',
+          two: '',
+          three: '',
+          four: '',
+          five: '',
+          six: '',
         },
         {
-          id:2,
+          id:7,
           number: '4',
           year: '净现金流量(现值)',
+          zero: '',
+          one: '',
+          two: '',
+          three: '',
+          four: '',
+          five: '',
+          six: '',
         },
         {
-          id:3,
+          id:8,
           number: '4.1',
           year: '累计净现金流量(现值)',
+          zero: '',
+          one: '',
+          two: '',
+          three: '',
+          four: '',
+          five: '',
+          six: '',
         },
         {
-          id:4,
+          id:9,
           number: '',
           year: '',
         },
         {
-          id:5,
+          id:10,
           number: '指标',
           year: '净现值NPV(10%)',
+          zero: '',
         },
         {
-          id:6,
+          id:11,
           number: '',
           year: '内部收益率IRR',
+          zero: '',
         },
         {
-          id:7,
+          id:12,
           number: '',
           year: '动态投资回收期(年)',
+          zero: '',
         },
         {
           number: '',
           year: ''
         },
         {
-          id:8,
           number: '',
           year: '现值系数',
           zero:1.00,
@@ -725,77 +716,79 @@ export default {
     getResult() {
       axios
           .post('/report/submit', {
-            developCost0: 1000,
-            omRevenue1: 10,
-            omRevenue2: 20,
-            omRevenue3: 30,
-            omRevenue4: 40,
-            omRevenue5: 50,
-            omRevenue6: 60,
-            opExpense1: 500,
-            opExpense2: 500,
-            opExpense3: 500,
-            opExpense4: 500,
-            opExpense5: 500,
-            opExpense6: 500,
+            developCost0:this.tableData4[0].zero,
+            saleRevenue1: this.tableData2[0].one,
+            saleRevenue2: this.tableData2[0].two,
+            saleRevenue3: this.tableData2[0].three,
+            saleRevenue4: this.tableData2[0].four,
+            saleRevenue5: this.tableData2[0].five,
+            saleRevenue6: this.tableData2[0].six,
+            omRevenue1: this.tableData2[1].one,
+            omRevenue2: this.tableData2[1].two,
+            omRevenue3: this.tableData2[1].three,
+            omRevenue4: this.tableData2[1].four,
+            omRevenue5: this.tableData2[1].five,
+            omRevenue6: this.tableData2[1].six,
+            opExpense1: this.tableData5[0].one,
+            opExpense2: this.tableData5[0].two,
+            opExpense3: this.tableData5[0].three,
+            opExpense4: this.tableData5[0].four,
+            opExpense5: this.tableData5[0].five,
+            opExpense6: this.tableData5[0].six,
             reportId: "",
-            saleRevenue1: 550,
-            saleRevenue2: 550,
-            saleRevenue3: 708,
-            saleRevenue4: 873,
-            saleRevenue5: 1047,
-            saleRevenue6: 1229,
+
           }).then(resp => {
         /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
-        this.formData.assistantId = resp.data.assistantId;
-        this.formData.cumulative0 = resp.data.cumulative0;
-        this.formData.cumulative1 = resp.data.cumulative1;
-        this.formData.cumulative2 = resp.data.cumulative2;
-        this.formData.cumulative3 = resp.data.cumulative3;
-        this.formData.cumulative4 = resp.data.cumulative4;
-        this.formData.cumulative5 = resp.data.cumulative5;
-        this.formData.cumulative6 = resp.data.cumulative6;
-        this.formData.dpp = resp.data.dpp;
-        this.formData.inflow1 = resp.data.inflow1;
-        this.formData.inflow2 = resp.data.inflow2;
-        this.formData.inflow3 = resp.data.inflow3;
-        this.formData.inflow4 = resp.data.inflow4;
-        this.formData.inflow5 = resp.data.inflow5;
-        this.formData.inflow6 = resp.data.inflow6;
-        this.formData.irr = resp.data.irr;
-        this.formData.netCashFlow0 = resp.data.netCashFlow0;
-        this.formData.netCashFlow1 = resp.data.netCashFlow1;
-        this.formData.netCashFlow2 = resp.data.netCashFlow2;
-        this.formData.netCashFlow3 = resp.data.netCashFlow3;
-        this.formData.netCashFlow4 = resp.data.netCashFlow4;
-        this.formData.netCashFlow5 = resp.data.netCashFlow5;
-        this.formData.netCashFlow6 = resp.data.netCashFlow6;
-        this.formData.npv = resp.data.npv;
-        this.formData.outflow0 = resp.data.outflow0;
-        this.formData.outflow1 = resp.data.outflow1;
-        this.formData.outflow2 = resp.data.outflow2;
-        this.formData.outflow3 = resp.data.outflow3;
-        this.formData.outflow4 = resp.data.outflow4;
-        this.formData.outflow5 = resp.data.outflow5;
-        this.formData.outflow6 = resp.data.outflow6;
-        this.formData.presentCumulative0 = resp.data.presentCumulative0;
-        this.formData.presentCumulative1 = resp.data.presentCumulative1;
-        this.formData.presentCumulative2 = resp.data.presentCumulative2;
-        this.formData.presentCumulative3 = resp.data.presentCumulative3;
-        this.formData.presentCumulative4 = resp.data.presentCumulative4;
-        this.formData.presentCumulative5 = resp.data.presentCumulative5;
-        this.formData.presentCumulative6 = resp.data.presentCumulative6;
-        this.formData.presentNetCashFlow0 = resp.data.presentNetCashFlow0;
-        this.formData.presentNetCashFlow1 = resp.data.presentNetCashFlow1;
-        this.formData.presentNetCashFlow2 = resp.data.presentNetCashFlow2;
-        this.formData.presentNetCashFlow3 = resp.data.presentNetCashFlow3;
-        this.formData.presentNetCashFlow4 = resp.data.presentNetCashFlow4;
-        this.formData.presentNetCashFlow5 = resp.data.presentNetCashFlow5;
-        this.formData.presentNetCashFlow6 = resp.data.presentNetCashFlow6;
+        this.tableData1[0].one = resp.data.inflow1;
+        this.tableData1[0].two = resp.data.inflow2;
+        this.tableData1[0].three = resp.data.inflow3;
+        this.tableData1[0].four = resp.data.inflow4;
+        this.tableData1[0].five = resp.data.inflow5;
+        this.tableData1[0].six = resp.data.inflow6;
+        this.tableData3[0].zero = resp.data.outflow0;
+        this.tableData3[0].one = resp.data.outflow1;
+        this.tableData3[0].two = resp.data.outflow2;
+        this.tableData3[0].three = resp.data.outflow3;
+        this.tableData3[0].four = resp.data.outflow4;
+        this.tableData3[0].five= resp.data.outflow5;
+        this.tableData3[0].six = resp.data.outflow6;
+        this.tableData4[0].zero = resp.data.developCost0;
+        this.tableData6[0].zero  = resp.data.netCashFlow0;
+        this.tableData6[0].one  = resp.data.netCashFlow1;
+        this.tableData6[0].two  = resp.data.netCashFlow2;
+        this.tableData6[0].three  = resp.data.netCashFlow3;
+        this.tableData6[0].four  = resp.data.netCashFlow4;
+        this.tableData6[0].five = resp.data.netCashFlow5;
+        this.tableData6[0].six  = resp.data.netCashFlow6;
+        this.tableData6[1].zero = resp.data.cumulative0;
+        this.tableData6[1].one = resp.data.cumulative1;
+        this.tableData6[1].two= resp.data.cumulative2;
+        this.tableData6[1].three= resp.data.cumulative3;
+        this.tableData6[1].four= resp.data.cumulative4;
+        this.tableData6[1].five= resp.data.cumulative5;
+        this.tableData6[1].six= resp.data.cumulative6;
+        this.tableData6[2].zero = resp.data.presentNetCashFlow0;
+        this.tableData6[2].one = resp.data.presentNetCashFlow1;
+        this.tableData6[2].two = resp.data.presentNetCashFlow2;
+        this.tableData6[2].three = resp.data.presentNetCashFlow3;
+        this.tableData6[2].four = resp.data.presentNetCashFlow4;
+        this.tableData6[2].five = resp.data.presentNetCashFlow5;
+        this.tableData6[2].six = resp.data.presentNetCashFlow6;
+        this.tableData6[3].zero = resp.data.presentCumulative0;
+        this.tableData6[3].one = resp.data.presentCumulative1;
+        this.tableData6[3].two = resp.data.presentCumulative2;
+        this.tableData6[3].three = resp.data.presentCumulative3;
+        this.tableData6[3].four  = resp.data.presentCumulative4;
+        this.tableData6[3].five  = resp.data.presentCumulative5;
+        this.tableData6[3].six = resp.data.presentCumulative6;
+        this.tableData6[5].zero = resp.data.npv;
+        this.tableData6[6].zero = resp.data.irr;
+        this.tableData6[7].zero = resp.data.dpp;
         this.formData.reportScore = resp.data.reportScore;
         this.formData.studentId = resp.data.studentId;
         this.formData.teacherId = resp.data.teacherId;
-        let result=resp.data;
+        this.formData.assistantId = resp.data.assistantId;
+        let result = resp.data;
         console.log(resp);
         console.log(result);
       }).catch(() => {
