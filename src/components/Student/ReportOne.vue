@@ -523,6 +523,10 @@ export default {
           five:'',
           six:'',
         },
+        {
+          number: '',
+          year: '',
+        },
       ],
        tableData3:[
         {
@@ -559,6 +563,14 @@ export default {
            five: '',
            six: '',
          },
+        {
+          number: '',
+          year: '',
+        },
+        {
+          number: '',
+          year: '',
+        },
           ],
       tableData6:[
         {
@@ -603,24 +615,23 @@ export default {
           six: '',
         },
         {
-          id:9,
           number: '',
           year: '',
         },
         {
-          id:10,
+          id:9,
           number: '指标',
           year: '净现值NPV(10%)',
           zero: '',
         },
         {
-          id:11,
+          id:10,
           number: '',
           year: '内部收益率IRR',
           zero: '',
         },
         {
-          id:12,
+          id:11,
           number: '',
           year: '动态投资回收期(年)',
           zero: '',
@@ -735,7 +746,7 @@ export default {
             opExpense4: this.tableData5[0].four,
             opExpense5: this.tableData5[0].five,
             opExpense6: this.tableData5[0].six,
-            reportId: "",
+            reportId: "195210820211213231700",
 
           }).then(resp => {
         /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
@@ -775,12 +786,12 @@ export default {
         this.tableData6[2].five = parseFloat(resp.data.presentNetCashFlow5).toFixed(0);
         this.tableData6[2].six = parseFloat(resp.data.presentNetCashFlow6).toFixed(0);
         this.tableData6[3].zero = resp.data.presentCumulative0;
-        this.tableData6[3].one = parseFloat(resp.data.presentCumulative0).toFixed(0);
-        this.tableData6[3].two = parseFloat(resp.data.presentCumulative0).toFixed(0);
-        this.tableData6[3].three = parseFloat(resp.data.presentCumulative0).toFixed(0);
-        this.tableData6[3].four  = parseFloat(resp.data.presentCumulative0).toFixed(0);
-        this.tableData6[3].five  = parseFloat(resp.data.presentCumulative0).toFixed(0);
-        this.tableData6[3].six = parseFloat(resp.data.presentCumulative0).toFixed(0);
+        this.tableData6[3].one = parseFloat(resp.data.presentCumulative1).toFixed(0);
+        this.tableData6[3].two = parseFloat(resp.data.presentCumulative2).toFixed(0);
+        this.tableData6[3].three = parseFloat(resp.data.presentCumulative3).toFixed(0);
+        this.tableData6[3].four  = parseFloat(resp.data.presentCumulative4).toFixed(0);
+        this.tableData6[3].five  = parseFloat(resp.data.presentCumulative5).toFixed(0);
+        this.tableData6[3].six = parseFloat(resp.data.presentCumulative6).toFixed(0);
         this.tableData6[5].zero = parseFloat(resp.data.npv).toFixed(2);
         this.tableData6[6].zero = (((resp.data.irr)*100).toFixed(2)+"%");
         this.tableData6[7].zero = parseFloat(resp.data.dpp).toFixed(2);
