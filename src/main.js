@@ -18,6 +18,17 @@ app.mount('#app')
 app.config.globalProperties.$axios = axios
 axios.defaults.baseURL='http://121.43.42.14:8080/api';
 
+/*
+//设置拦截器
+axios.interceptors.request.use(
+    config => {
+        if (localStorage.getItem('Authorization')) {
+            config.headers.Authorization = localStorage.getItem('Authorization');
+        }
 
-
-
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+});
+*/

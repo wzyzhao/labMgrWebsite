@@ -13,14 +13,14 @@
           <el-icon><user /></el-icon>
           姓名
         </template>
-        1
+        jeremy
       </el-descriptions-item>
       <el-descriptions-item align="center" width="100px">
         <template #label>
           <el-icon><user /></el-icon>
           年级
         </template>
-        1
+        大三
       </el-descriptions-item>
       <el-descriptions-item align="center" width="100px">
         <template #label>

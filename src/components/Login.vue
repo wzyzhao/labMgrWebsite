@@ -45,6 +45,7 @@
 
 <script>
 import axios from 'axios'
+import { mapMutations } from 'vuex';
 import {Edit,UploadFilled} from "@element-plus/icons";
 axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
 
@@ -67,6 +68,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['changeLogin']),
     login () {
       this.$axios
         .post('/login', {
@@ -81,7 +83,42 @@ export default {
                 type: 'error'
               })
             } else {
-              this.$router.replace({path: '/student'})
+              window.alert(resp.data.user.id.toString())
+              console.log(resp.data.user.id.toString())
+              console.log(resp.data)
+              //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
+
+
+              localStorage.setItem('studentId',resp.data.user.id.toString())
+              let identity = resp.data.user.authority.toString()
+
+              window.alert("identity:"+identity)
+
+              //may not work
+              this.userToken = 'Bearer ' + resp.data.token;
+              window.alert(this.userToken)
+              // 将用户token保存到vuex中
+              // this.changeLogin({ Authorization: this.userToken });
+
+              switch (identity) {
+                case "1":
+                  this.$router.push({path: '/student'});
+                  break;
+                case "2":
+                  this.$router.push({path: '/teacher'});
+                  break;
+                case "3":
+                  this.$router.push({path: '/teacher'});
+                  break;
+                case "4":
+                  this.$router.push({path: '/assistant'});
+                  break;
+                case "5":
+                  this.$router.push("/admin");
+                  break;
+              }
+              //this.$router.push({path: '/student'})
+
             }
           } else {
             this.$message({
@@ -89,14 +126,6 @@ export default {
               type: 'error'
             })
           }
-          /*if (resp.data) {
-            // var data = resp.data.result
-            this.$router.replace({path: '/home'})
-            // var path = _this.$route.query.redirect
-            // _this.$router.replace({path: path === '/' || path === undefined ? '/admin/dashboard' : path})
-          } else {
-            window.alert('邮箱或密码错误')
-          }*/
         })
         .catch(failResponse => {
         })

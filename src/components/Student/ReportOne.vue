@@ -2,10 +2,14 @@
   <Header></Header>
     <el-container style="height: 100vh; border: 1px solid #eee">
       <el-main>
-        <el-button @click="jumpToStudent" style="position: relative;right: 660px">
+        <el-button @click="jumpToStudent" style="position: relative;right: 800px">
           返回首页<el-icon class="el-icon--right"><Back /></el-icon>
         </el-button>
           <div class="etitle">独立方案评价指标计算</div>
+        <br/>
+          <div>
+            <el-button style="position: relative;right: 800px" @click="showReportId">报告编号</el-button>
+          </div>
           <el-table
               :data="tableData1"
               border
@@ -462,9 +466,14 @@
               width="150">
           </el-table-column>
         </el-table>
+        <br/>
         <el-button type="primary" @click="getResult" style="position: relative;top:60px">
           提交<el-icon class="el-icon--right"><Upload /></el-icon>
         </el-button>
+          <el-button type="primary" @click="saveReport" style="position: relative;top:60px">
+            暂存<el-icon class="el-icon--right"><Upload /></el-icon>
+        </el-button>
+        <br/>
       </el-main>
     </el-container>
 </template>
@@ -473,6 +482,7 @@
 import Header from "@/components/common/Header";
 import { Back,Upload } from '@element-plus/icons';
 import axios from "axios";
+import {ElNotification} from "element-plus";
 export default {
   components: {
   Back,Header,Upload
@@ -724,6 +734,46 @@ export default {
     handleInputChange(val, index) {
       this.currentData[index - 1].positionCode = val
     },
+    saveReport() {
+
+      axios
+          .post('/report/save', {
+            developCost0:this.tableData4[0].zero,
+            saleRevenue1: this.tableData2[0].one,
+            saleRevenue2: this.tableData2[0].two,
+            saleRevenue3: this.tableData2[0].three,
+            saleRevenue4: this.tableData2[0].four,
+            saleRevenue5: this.tableData2[0].five,
+            saleRevenue6: this.tableData2[0].six,
+            omRevenue1: this.tableData2[1].one,
+            omRevenue2: this.tableData2[1].two,
+            omRevenue3: this.tableData2[1].three,
+            omRevenue4: this.tableData2[1].four,
+            omRevenue5: this.tableData2[1].five,
+            omRevenue6: this.tableData2[1].six,
+            opExpense1: this.tableData5[0].one,
+            opExpense2: this.tableData5[0].two,
+            opExpense3: this.tableData5[0].three,
+            opExpense4: this.tableData5[0].four,
+            opExpense5: this.tableData5[0].five,
+            opExpense6: this.tableData5[0].six,
+            //reportId: "195210820211213231700",
+            reportId:localStorage.getItem('reportId'),
+
+
+          }).then(resp => {
+        /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
+
+        let result = resp.data;
+        console.log(resp);
+        console.log(result);
+      }).catch(() => {
+        this.$message({
+          message: '提交失败，请重试',
+          type: 'error'
+        })
+      })
+    },
     getResult() {
       axios
           .post('/report/submit', {
@@ -746,10 +796,13 @@ export default {
             opExpense4: this.tableData5[0].four,
             opExpense5: this.tableData5[0].five,
             opExpense6: this.tableData5[0].six,
-            reportId: "195210820211213231700",
+            //reportId: "195210820211213231700",
+            //reportId: "1952108"+timestamp,
+            reportId:localStorage.getItem('reportId'),
+
 
           }).then(resp => {
-        /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
+        window.alert(localStorage.getItem('reportId'))
         this.tableData1[0].one = resp.data.inflow1;
         this.tableData1[0].two = resp.data.inflow2;
         this.tableData1[0].three = resp.data.inflow3;
@@ -800,6 +853,7 @@ export default {
         this.formData.teacherId = resp.data.teacherId;
         this.formData.assistantId = resp.data.assistantId;
         let result = resp.data;
+        //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
         console.log(resp);
         console.log(result);
       }).catch(() => {
@@ -809,6 +863,14 @@ export default {
         })
       })
     },
+    showReportId(){
+      //window.alert(localStorage.getItem('reportId'))
+      ElNotification({
+        title: '当前实验报告编号',
+        message: localStorage.getItem('reportId').toString(),
+        type: 'info',
+      })
+    }
   }
 }
 </script>

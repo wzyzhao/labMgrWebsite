@@ -8,6 +8,8 @@ import Teacher from "@/views/Teacher";
 import CCTeacher from "@/views/CCTeacher";
 import Assistant from "@/views/Assistant";
 import ReportOne from '../components/Student/ReportOne'
+import ClazzOne from '../components/Clazz/ClazzOne'
+import ExperimentList from "@/components/Student/ExperimentList";
 const routes = [
     // 下面都是固定的写法
     {
@@ -28,12 +30,12 @@ const routes = [
     {
       path: '/student',
       name: 'Student',
-      component: Student
+      component: Student,
     },
     {
         path: '/teacher',
         name: 'Teacher',
-        component: Teacher
+        component: Teacher,
     },
     {
         path: '/ccTeacher',
@@ -55,11 +57,37 @@ const routes = [
         name: 'reportOne',
         component: ReportOne
     },
+    {
+        path: '/clazzOne',
+        name: 'ClazzOne',
+        component: ClazzOne,
+    },
+    {
+        path: '/experimentList',
+        name: 'ExperimentList',
+        component: ExperimentList,
+    }
   ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+/*
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') {
+        next();
+    } else {
+        let token = localStorage.getItem('Authorization');
+
+        if (token === null || token === '') {
+            next('/login');
+        } else {
+            next();
+        }
+    }
+});*/
 
 export default router

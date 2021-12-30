@@ -6,14 +6,13 @@
           v-model="searchReportId"
           placeholder="请输入实验报告单编号"
           :prefix-icon="Search"
-
       />
     </el-col>
     <el-col span="8">
       <el-button @click="jumpToTargetReport">搜索</el-button>
     </el-col>
     <el-col span="8">
-      <el-button style="position: relative;left: 1100px" @click="getReportList">刷新实验报告列表</el-button>
+      <el-button style="position: relative;left: 1100px;top:10px" @click="getReportList">刷新实验报告列表</el-button>
     </el-col>
   </el-row>
 
@@ -36,6 +35,11 @@
   <br/>
   <br/>
 
+  <el-button @click="jumpToReportOne">新建报告</el-button>
+
+  <br/>
+  <br/>
+
   <el-pagination
       :page-size="20"
       :pager-count="11"
@@ -47,6 +51,8 @@
 </template>
 
 <script scope>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -104,6 +110,7 @@ export default {
           .then(resp => {
             console.log(resp)
             console.log(resp.data)
+
           })
           .catch(failResponse => {
 
@@ -120,6 +127,9 @@ export default {
             //window.alert(resp.data.length)
             console.log(resp)
             console.log(resp.data)
+            console.log(111)
+            //console.log(resp.data)
+
             for (let i=0;i<4;i++) {
               this.tableData[i].reportId=resp.data[i].reportId
               if (this.tableData[i].reportScore==null) {
@@ -134,7 +144,40 @@ export default {
           .catch(failResponse => {
 
           })
-    }
+    },
+    jumpToReportOne() {
+      let date=new Date();
+      let hou,min,sec
+      hou=date.getHours().toString()
+      min=date.getMinutes().toString()
+      sec=date.getSeconds().toString()
+      hou = hou.length < 2 ? '0' + hou : hou //格式化时 09
+      min = min.length < 2 ? '0' + min : min //格式化分 09
+      sec = sec.length < 2 ? '0' + sec : sec //格式化秒 09
+      let timestamp=date.getFullYear().toString()+(date.getMonth()+1).toString()
+          +date.getDate().toString()+hou+min+sec;
+      let sid=localStorage.getItem('studentId')
+      localStorage.setItem('reportId',sid+timestamp)
+      //window.alert(timestamp)
+      window.alert("reportId:"+sid+timestamp)
+      axios
+          .post('/report/generate', {
+
+            reportId:sid+timestamp,
+            studentId:sid,
+
+          }).then(resp => {
+        let result = resp.data;
+        console.log(resp);
+        console.log(result);
+      }).catch(() => {
+        this.$message({
+          message: '提交失败，请重试',
+          type: 'error'
+        })
+      })
+      this.$router.push("/reportOne");
+    },
   },
 }
 </script>
