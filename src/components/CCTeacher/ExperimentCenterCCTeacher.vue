@@ -188,12 +188,13 @@
                 title="上传实验指导书"
                 width="30%"
                 :before-close="handleClose"
-            >
+            >s
               <span>
                 <el-upload
                     class="upload-demo"
                     drag
                     action="https://jsonplaceholder.typicode.com/posts/"
+                    accept="ins/pdf,ins/docx,ins/doc"
                     multiple
                 >
     <el-icon class="el-icon--upload"><upload-filled /></el-icon>

@@ -15,17 +15,21 @@
             </el-menu-item>
             <el-menu-item index="2">
               <el-icon class="menu"><document /></el-icon>
-              <span class="menu">班级管理</span>
+              <span class="menu">课程管理</span>
             </el-menu-item>
             <el-menu-item index="3">
               <el-icon class="menu"><document /></el-icon>
-              <span class="menu">实验中心</span>
+              <span class="menu">班级管理</span>
             </el-menu-item>
             <el-menu-item index="4">
+              <el-icon class="menu"><document /></el-icon>
+              <span class="menu">实验中心</span>
+            </el-menu-item>
+            <el-menu-item index="5">
               <el-icon class="menu"><Link /></el-icon>
               <span class="menu">成绩管理</span>
             </el-menu-item>
-            <el-menu-item index="5">
+            <el-menu-item index="6">
               <el-icon class="menu"><chat-line-round /></el-icon>
               <span class="menu">公告中心</span>
             </el-menu-item>
@@ -36,10 +40,11 @@
     <el-container style="height: 100vh; border: 1px solid #eee">
       <el-main>
         <CCTeacherIndex v-if="this.choice === 1"></CCTeacherIndex>
-        <ClassManage v-if="this.choice === 2"></ClassManage>
-        <ExperimentCenterCCTeacher v-if="this.choice === 3"></ExperimentCenterCCTeacher>
-        <ScoreManage v-if="this.choice === 4"></ScoreManage>
-        <Billboard v-if="this.choice === 5"></Billboard>
+        <CourseManage v-if="this.choice === 2"></CourseManage>
+        <ClassManage v-if="this.choice === 3"></ClassManage>
+        <ExperimentCenterCCTeacher v-if="this.choice === 4"></ExperimentCenterCCTeacher>
+        <ScoreManage v-if="this.choice === 5"></ScoreManage>
+        <Billboard v-if="this.choice === 6"></Billboard>
       </el-main>
     </el-container>
   </el-container>
@@ -53,9 +58,10 @@ import CCTeacherIndex from "@/components/CCTeacher/CCTeacherIndex";
 import Billboard from "@/components/CCTeacher/Billboard";
 import ScoreManage from "@/components/CCTeacher/ScoreManage";
 import ExperimentCenterCCTeacher from "@/components/CCTeacher/ExperimentCenterCCTeacher";
+import CourseManage from "@/components/CCTeacher/CourseManage";
 
 export default {
-  components: {ExperimentCenterCCTeacher, CCTeacherIndex,Billboard,ClassManage,ScoreManage,Menu,ChatLineRound,Document,Link },
+  components: {ExperimentCenterCCTeacher, CCTeacherIndex,Billboard,ClassManage,ScoreManage,CourseManage,Menu,ChatLineRound,Document,Link },
   data(){
     return{
       choice: 1,
@@ -81,6 +87,9 @@ export default {
           break;
         case "5":
           this.choice = 5;
+          break;
+        case "6":
+          this.choice = 6;
           break;
         case "0":
           this.$router.push("/");

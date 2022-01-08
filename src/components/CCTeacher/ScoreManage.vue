@@ -1,7 +1,7 @@
 <template>
 
-  <el-button style="position: relative;right: 760px" @click="getReportList">刷新成绩列表</el-button>
-  <el-table :data="tableData" style="width: 100%">
+  <el-button style="position: relative;right: 660px" @click="getReportList">刷新成绩列表</el-button>
+  <el-table :cell-class-name="tableCellClassName" @cell-click="markReport" :data="tableData" style="width: 100%">
     <el-table-column fixed prop="experimentName" label="实验名称" width="200" />
     <el-table-column prop="reportId" label="报告编号" width="200" />
     <el-table-column prop="studentId" label="学生学号" width="120" />
@@ -31,7 +31,7 @@
 
 </template>
 
-<script scope>
+<script scoped>
 import ElMessage, {ElMessageBox} from "element-plus";
 
 export default {
@@ -57,7 +57,7 @@ export default {
           teacherId:'',
           assistantId:'',
           state: '已批阅',
-          reportScore: 'A-',
+          reportScore: null,
           tag: 'Office',
         },
         {
@@ -68,7 +68,7 @@ export default {
           teacherId:'',
           assistantId:'',
           state: '未批阅',
-          reportScore: 'A',
+          reportScore: null,
           tag: 'Home',
         },
         {
@@ -79,7 +79,7 @@ export default {
           teacherId:'',
           assistantId:'',
           state: '已批阅',
-          reportScore: 'B+',
+          reportScore: null,
           tag: 'Office',
         },
         {
@@ -90,7 +90,7 @@ export default {
           teacherId:'',
           assistantId:'',
           state: '未批阅',
-          reportScore: 'A',
+          reportScore: null,
           tag: 'Office',
         },
         {
@@ -101,7 +101,7 @@ export default {
           teacherId:'',
           assistantId:'',
           state: '已批阅',
-          reportScore: 'A-',
+          reportScore: null,
           tag: 'Office',
         },
       ],
@@ -111,14 +111,36 @@ export default {
     handleClick() {
       console.log('click')
     },
-    markReport() {
-      ElMessageBox.prompt('请输入您的评分', '报告编号:'+this.tableData[1].reportId.toString(), {
+    tableCellClassName({row, rowIndex}) {
+      //注意这里是解构
+      //利用单元格的 className 的回调方法，给行列索引赋值
+      row.index = rowIndex;
+    },
+    markReport(row, cell, index) {
+      window.alert(row.index)
+      ElMessageBox.prompt('请输入您的评分', '报告编号:'+this.tableData[row.index].reportId.toString(), {
+
         confirmButtonText: '确认',
         cancelButtonText: '取消',
 
         inputErrorMessage: '无效的分数',
       })
           .then(({ value }) => {
+            //window.alert(this.tableData[row.index].reportId.toString())
+                this.$axios
+                    .post('/report/score', {
+                      assistantId:'11',
+                      teacherId:'1',
+                      reportId:this.tableData[row.index].reportId.toString(),
+                      reportScore:value,
+                    })
+                    .then(resp => {
+                      console.log(resp)
+
+                    })
+                    .catch(failResponse => {
+
+                    })
             ElMessage({
               type: 'success',
               message: `Your email is:${value}`,
@@ -146,7 +168,12 @@ export default {
           for (let i=0;i<6;i++) {
             this.tableData[i].assistantId=resp.data[i].assistantId
             this.tableData[i].reportId=resp.data[i].reportId
-            this.tableData[i].reportScore=resp.data[i].reportScore
+            if (resp.data[i].reportScore==null){
+              this.tableData[i].reportScore='NaN'
+            }
+            else{
+              this.tableData[i].reportScore=resp.data[i].reportScore
+            }
             this.tableData[i].studentId=resp.data[i].studentId
             this.tableData[i].teacherId=resp.data[i].teacherId
           }
