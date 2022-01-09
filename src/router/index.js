@@ -12,6 +12,7 @@ import ExperimentList from "@/components/Student/ExperimentList";
 import PDF from "@/components/PDF";
 import Admin from "@/views/Admin";
 import ReleaseNotice from "@/components/CCTeacher/ReleaseNotice";
+import StudentList from "@/components/CCTeacher/StudentList";
 import UserProfile from "@/components/UserInfo/UserProfile";
 import UserPassword from "@/components/UserInfo/UserPassword";
 import UserInformation from "@/components/UserInfo/UserInformation";
@@ -26,6 +27,11 @@ const routes = [
         path: '/releaseNotice',
         name: 'ReleaseNotice',
         component: ReleaseNotice,
+    },
+    {
+        path: '/studentList',
+        name: 'StudentList',
+        component: StudentList,
     },
     {
         path: '/pdf',

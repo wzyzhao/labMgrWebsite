@@ -37,7 +37,7 @@
 
             <el-button size="small" type="primary" @click="checkClass(1)">查看班级</el-button>
             <el-button size="small" type="info" @click="assignAssistant(1)">分配助教</el-button>
-            <el-button size="small" type="info" @click="addStudent">添加学生</el-button>
+            <el-button size="small" type="info" @click="addStudent(1)">添加学生</el-button>
 
 
           </div>
@@ -79,7 +79,7 @@
 
             <el-button size="small" type="primary" @click="checkClass(2)">查看班级</el-button>
             <el-button size="small" type="info" @click="assignAssistant(2)">分配助教</el-button>
-            <el-button size="small" type="info">添加学生</el-button>
+            <el-button size="small" type="info" @click="addStudent(2)">添加学生</el-button>
 
 
           </div>
@@ -169,6 +169,8 @@ export default defineComponent({
   methods: {
     checkClass(param) {
       window.alert(param)
+      let routerJump =this.$router.resolve({path:'/studentList'})
+      window.open(routerJump.href,'_blank')
       this.$axios
           .get('/class/studentList', {
             params:{
@@ -205,6 +207,38 @@ export default defineComponent({
             ElMessage({
               type: 'success',
               message: `成功分配助教:${value}`,
+            })
+          })
+          .catch(() => {
+            ElMessage({
+              type: 'info',
+              message: '取消操作',
+            })
+          })
+
+    },
+    addStudent(param){
+      ElMessageBox.prompt('请输入要添加的学生ID', 'Tip', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        inputErrorMessage: '无效的学生ID',
+      })
+          .then(({ value }) => {
+            this.$axios
+                .post('/setClass/student', {
+                  studentId:value,
+                  classId:param.toString(),
+                })
+                .then(resp => {
+                  console.log(resp)
+                  console.log(resp.data)
+                })
+                .catch(failResponse => {
+
+                })
+            ElMessage({
+              type: 'success',
+              message: `成功添加学生:${value}`,
             })
           })
           .catch(() => {
