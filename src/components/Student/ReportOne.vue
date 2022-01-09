@@ -936,6 +936,7 @@ export default {
         let result = resp.data;
         //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
         console.log(resp);
+        console.log(resp.data);
         console.log(result);
         for (let i=0;i<4;i++)
         {

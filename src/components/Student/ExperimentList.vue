@@ -160,6 +160,7 @@ export default {
       sec = sec.length < 2 ? '0' + sec : sec //格式化秒 09
       let timestamp=date.getFullYear().toString()+mon+dat+hou+min+sec;
       let sid=localStorage.getItem('studentId')
+      //sid='1952108'
       localStorage.setItem('reportId',sid+timestamp)
       //window.alert(timestamp)
       window.alert("reportId:"+sid+timestamp)
