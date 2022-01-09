@@ -10,6 +10,7 @@ import Assistant from "@/views/Assistant";
 import ReportOne from '../components/Student/ReportOne'
 import ClazzOne from '../components/Clazz/ClazzOne'
 import ExperimentList from "@/components/Student/ExperimentList";
+import ReleaseNotice from "@/components/CCTeacher/ReleaseNotice";
 import PDF from "@/components/PDF";
 const routes = [
     // 下面都是固定的写法
@@ -72,7 +73,12 @@ const routes = [
         path: '/experimentList',
         name: 'ExperimentList',
         component: ExperimentList,
-    }
+    },
+    {
+        path: '/releaseNotice',
+        name: 'ReleaseNotice',
+        component: ReleaseNotice,
+    },
   ]
 
 const router = createRouter({

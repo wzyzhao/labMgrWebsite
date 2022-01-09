@@ -147,15 +147,18 @@ export default {
     },
     jumpToReportOne() {
       let date=new Date();
-      let hou,min,sec
+      let mon,dat,hou,min,sec
+      mon=(date.getMonth()+1).toString()
+      dat=date.getDate().toString()
       hou=date.getHours().toString()
       min=date.getMinutes().toString()
       sec=date.getSeconds().toString()
+      mon = mon.length < 2 ? '0' + mon : mon //格式化月 09
+      dat = dat.length < 2 ? '0' + dat : dat //格式化日 09
       hou = hou.length < 2 ? '0' + hou : hou //格式化时 09
       min = min.length < 2 ? '0' + min : min //格式化分 09
       sec = sec.length < 2 ? '0' + sec : sec //格式化秒 09
-      let timestamp=date.getFullYear().toString()+(date.getMonth()+1).toString()
-          +date.getDate().toString()+hou+min+sec;
+      let timestamp=date.getFullYear().toString()+mon+dat+hou+min+sec;
       let sid=localStorage.getItem('studentId')
       localStorage.setItem('reportId',sid+timestamp)
       //window.alert(timestamp)

@@ -1,6 +1,7 @@
 <template>
 
-  <el-button style="position: relative;right: 660px" @click="getReportList">刷新成绩列表</el-button>
+  <el-button style="position: relative;right: 660px" v-if="this.clicked===true" @click="getReportList">查看成绩列表</el-button>
+  <el-button style="position: relative;right: 660px" v-if="this.clicked===false" @click="refreshReportList">刷新成绩列表</el-button>
   <el-table :cell-class-name="tableCellClassName" @cell-click="markReport" :data="tableData" style="width: 100%">
     <el-table-column fixed prop="experimentName" label="实验名称" width="200" />
     <el-table-column prop="reportId" label="报告编号" width="200" />
@@ -11,7 +12,7 @@
     <el-table-column fixed="right" label="操作" width="380">
       <template #default>
         <el-button size="small" type="primary" v-if="tableData" round @click="markReport">批阅报告</el-button>
-        <el-button size="small" type="primary" v-if="tableData.state=='已批阅'" round @click="markReport">复核成绩</el-button>
+        <el-button size="small" type="primary" v-if="tableData.state==='已批阅'" round @click="markReport">复核成绩</el-button>
         <el-button size="small" type="info" round @click="handleClick">查看详细成绩</el-button>
         <el-button size="small" round @click="downloadReport">下载报告</el-button>
       </template>
@@ -37,73 +38,8 @@ import ElMessage, {ElMessageBox} from "element-plus";
 export default {
   data() {
     return {
+      clicked:true,
       tableData: [
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Albert',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '已批阅',
-          reportScore: null,
-          tag: 'Home',
-        },
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Jeremy',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '已批阅',
-          reportScore: null,
-          tag: 'Office',
-        },
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Mia',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '未批阅',
-          reportScore: null,
-          tag: 'Home',
-        },
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Daniel',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '已批阅',
-          reportScore: null,
-          tag: 'Office',
-        },
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Alex',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '未批阅',
-          reportScore: null,
-          tag: 'Office',
-        },
-        {
-          experimentName: '独立方案评价指标计算实验',
-          reportId: '',
-          studentName: 'Chris',
-          studentId:'',
-          teacherId:'',
-          assistantId:'',
-          state: '已批阅',
-          reportScore: null,
-          tag: 'Office',
-        },
       ],
     }
   },
@@ -117,7 +53,7 @@ export default {
       row.index = rowIndex;
     },
     markReport(row, cell, index) {
-      window.alert(row.index)
+      //window.alert(row.index)
       ElMessageBox.prompt('请输入您的评分', '报告编号:'+this.tableData[row.index].reportId.toString(), {
 
         confirmButtonText: '确认',
@@ -129,8 +65,8 @@ export default {
             //window.alert(this.tableData[row.index].reportId.toString())
                 this.$axios
                     .post('/report/score', {
-                      assistantId:'11',
-                      teacherId:'1',
+                      assistantId:'',
+                      teacherId:'2952108',
                       reportId:this.tableData[row.index].reportId.toString(),
                       reportScore:value,
                     })
@@ -158,6 +94,7 @@ export default {
 
     },
     getReportList(){
+      this.clicked=false;
       this.$axios
         .get('/report/getOverview', {
 
@@ -165,7 +102,18 @@ export default {
         .then(resp => {
           console.log(resp)
 
-          for (let i=0;i<6;i++) {
+          for (let i=0;i<resp.data.length;i++) {
+            this.tableData.push({
+              experimentName: '独立方案评价指标计算实验',
+              reportId: '',
+              studentName: 'Chris',
+              studentId:'',
+              teacherId:'',
+              assistantId:'',
+              state: '已批阅',
+              reportScore: null,
+              tag: 'Office',
+            },)
             this.tableData[i].assistantId=resp.data[i].assistantId
             this.tableData[i].reportId=resp.data[i].reportId
             if (resp.data[i].reportScore==null){
@@ -176,11 +124,50 @@ export default {
             }
             this.tableData[i].studentId=resp.data[i].studentId
             this.tableData[i].teacherId=resp.data[i].teacherId
+
           }
         })
         .catch(failResponse => {
 
         })
+    },
+    refreshReportList(){
+      this.tableData.dispose();
+      this.$axios
+          .get('/report/getOverview', {
+
+          })
+          .then(resp => {
+            console.log(resp)
+
+            for (let i=0;i<resp.data.length;i++) {
+              this.tableData.push({
+                experimentName: '独立方案评价指标计算实验',
+                reportId: '',
+                studentName: 'Chris',
+                studentId:'',
+                teacherId:'',
+                assistantId:'',
+                state: '已批阅',
+                reportScore: null,
+                tag: 'Office',
+              },)
+              this.tableData[i].assistantId=resp.data[i].assistantId
+              this.tableData[i].reportId=resp.data[i].reportId
+              if (resp.data[i].reportScore==null){
+                this.tableData[i].reportScore='NaN'
+              }
+              else{
+                this.tableData[i].reportScore=resp.data[i].reportScore
+              }
+              this.tableData[i].studentId=resp.data[i].studentId
+              this.tableData[i].teacherId=resp.data[i].teacherId
+
+            }
+          })
+          .catch(failResponse => {
+
+          })
     },
   },
 }
