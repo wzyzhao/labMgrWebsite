@@ -76,27 +76,17 @@ export default {
           password: this.formData.password
         })
         .then(resp => {
-          if ((resp.data)){
+          if (resp.data.status==1){
             if ((this.formData.password==''||this.formData.email=='')) {
               this.$message({
                 message: '邮箱和密码不能为空',
                 type: 'error'
               })
             } else {
-              //window.alert(resp.data.user.id.toString())
-              //console.log(resp.data.user.id.toString())
-              //console.log(resp.data)
-              //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
               sessionStorage.setItem("token", 'true')
-
+              localStorage.setItem('currentIdentity',resp.data.user.authority.toString())
               localStorage.setItem('studentId',resp.data.user.id.toString())
               let identity = resp.data.user.authority.toString()
-
-              //window.alert("identity:"+identity)
-
-              //may not work
-              this.userToken = 'Bearer ' + resp.data.token;
-              //window.alert(this.userToken)
 
               switch (identity) {
                 case "1":
@@ -119,7 +109,7 @@ export default {
             }
           } else {
             this.$message({
-              message: '邮箱密码错误',
+              message: '邮箱或密码错误',
               type: 'error'
             })
           }

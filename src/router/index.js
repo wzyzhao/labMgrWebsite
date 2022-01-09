@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Register from '../components/Register'
 import Login from '../components/Login'
 import Student from "../views/Student";
-import UserInformation from "@/views/UserInformation";
 import Teacher from "@/views/Teacher";
 import CCTeacher from "@/views/CCTeacher";
 import Assistant from "@/views/Assistant";
@@ -12,12 +11,21 @@ import ClazzOne from '../components/Clazz/ClazzOne'
 import ExperimentList from "@/components/Student/ExperimentList";
 import PDF from "@/components/PDF";
 import Admin from "@/views/Admin";
+import ReleaseNotice from "@/components/CCTeacher/ReleaseNotice";
+import UserProfile from "@/components/UserInfo/UserProfile";
+import UserPassword from "@/components/UserInfo/UserPassword";
+import UserInformation from "@/components/UserInfo/UserInformation";
 const routes = [
     // 下面都是固定的写法
     {
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+        path: '/releaseNotice',
+        name: 'ReleaseNotice',
+        component: ReleaseNotice,
     },
     {
         path: '/pdf',
@@ -81,12 +89,30 @@ const routes = [
         }
     },
     {
-      path: '/userInformation',
-      name: 'UserInformation',
-      component: UserInformation,
+    path: '/userInformation',
+    name: 'UserInformation',
+    component: UserInformation,
+    meta: {
+    requireAuth: true
+         },
+
+    },
+    {
+        path: '/userProfile',
+        name: 'UserProfile',
+        component: UserProfile,
         meta: {
             requireAuth: true
-        }
+        },
+
+    },
+    {
+        path: '/userPassword',
+        name: 'UserPassword',
+        component: UserPassword,
+        meta: {
+            requireAuth: true
+        },
     },
     {
         path: '/reportOne',

@@ -18,13 +18,14 @@ import {SwitchButton, Avatar} from "@element-plus/icons";
 export default {
   components: {SwitchButton,Avatar},
   methods: {
-    logout(){
-
+    logout() {
+      sessionStorage.clear()
+      this.$router.push('/login')
     },
     jumpToUserInfo()
     {
       this.$router.push({path: '/userInformation'})
-    }
+    },
   }
 }
 </script>

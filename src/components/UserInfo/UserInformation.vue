@@ -29,71 +29,16 @@
         </el-col>
       </el-row>
     </el-aside>
-  <el-container style="height: 100vh; border: 1px solid #eee">
-  <el-main>
-    <el-descriptions
-        class="margin-top"
-        title="用户个人信息"
-        :column="3"
-        border
-    >
-      <el-descriptions-item align="center" width="100px">
-        <template #label>
-          <el-icon><user /></el-icon>
-          姓名
-        </template>
-        {{this.dataForm.studentName}}
-      </el-descriptions-item>
-      <el-descriptions-item align="center" width="100px">
-        <template #label>
-          <el-icon><user /></el-icon>
-          性别
-        </template>
-        {{this.dataForm.studentGender}}
-      </el-descriptions-item>
-      <el-descriptions-item align="center" width="100px">
-        <template #label>
-          <el-icon><tickets /></el-icon>
-          邮箱
-        </template>
-        {{this.dataForm.studentEmail}}
-      </el-descriptions-item>
-      <el-descriptions-item align="center">
-        <template #label>
-          <el-icon><iphone /></el-icon>
-          用户ID
-        </template>
-        {{this.dataForm.studentId}}
-      </el-descriptions-item>
-      <el-descriptions-item align="center">
-        <template #label>
-          <el-icon><tickets /></el-icon>
-          最终成绩
-        </template>
-        {{this.dataForm.studentFinalScore}}
-      </el-descriptions-item>
-    </el-descriptions>
-
-  <el-form
-      ref="ruleForm"
-      label-width="120px"
-      class="demo-ruleForm"
-      style="position: relative;right:80px;top:30px"
-  >
-
-  </el-form>
-  </el-main>
-  </el-container>
   </el-container>
 </template>
 
 <script scoped>
-import {User, Iphone, Tickets,Setting,Refresh,Back} from '@element-plus/icons'
+import {Setting,Refresh,Back} from '@element-plus/icons'
 export default {
-  components:{User, Iphone,Tickets,Setting,Refresh,Back},
+  components: { Setting, Refresh, Back},
   data() {
     return {
-      dataForm:{
+      dataForm: {
         studentId: '',
         studentEmail: '',
         studentName: '',
@@ -104,19 +49,28 @@ export default {
     }
   },
   methods: {
-    jumpToProfile(){
+    jumpToProfile() {
       this.$router.push('/userProfile')
     },
-    jumpToPassword(){
+    jumpToPassword() {
       this.$router.push('/userPassword')
     },
-    jumpToAppIndex(){
-      switch (localStorage.getItem("currentIdentity")){
-        case "1":this.$router.push('/student');break;
-        case "2":this.$router.push('/');break;
-        case "3":this.$router.push('/');break;
-        case "4":this.$router.push('/');break;
-        default:break;
+    jumpToAppIndex() {
+      switch (localStorage.getItem("currentIdentity")) {
+        case "1":
+          this.$router.push('/student');
+          break;
+        case "2":
+          this.$router.push('/');
+          break;
+        case "3":
+          this.$router.push('/');
+          break;
+        case "4":
+          this.$router.push('/');
+          break;
+        default:
+          break;
       }
     },
     getStudentInformation() {
@@ -129,10 +83,10 @@ export default {
           }).then(resp => {
         /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
         this.dataForm.studentId=localStorage.getItem('studentId'),
-        this.dataForm.studentEmail=resp.data.studentEmail,
-        this.dataForm.studentGender=resp.data.studentGender,
-        this.dataForm.studentName=resp.data.studentName,
-        this.dataForm.studentFinalScore=resp.data.studentFinalScore
+            this.dataForm.studentEmail=resp.data.studentEmail,
+            this.dataForm.studentGender=resp.data.studentGender,
+            this.dataForm.studentName=resp.data.studentName,
+            this.dataForm.studentFinalScore=resp.data.studentFinalScore
       }).catch(() => {
         this.$message({
           message: '提交失败，请重试',
@@ -140,7 +94,7 @@ export default {
         })
       })
     },
-  },
+  }
 }
 </script>
 
