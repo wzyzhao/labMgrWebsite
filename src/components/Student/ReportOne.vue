@@ -512,7 +512,10 @@ export default {
         },
         color: ['#ff7f50','#87cefa','#da70d6','#32cd32','#6495ed',
           '#ff69b4','#ba55d3','#cd5c5c','#ffa500','#40e0d0'],
-        tooltip : {},
+        tooltip : {
+          trigger:'axis',
+          show:true
+        },
         //图例--折线提示提示
         legend: {
           x: 'center',

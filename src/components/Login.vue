@@ -83,22 +83,20 @@ export default {
                 type: 'error'
               })
             } else {
-              window.alert(resp.data.user.id.toString())
-              console.log(resp.data.user.id.toString())
-              console.log(resp.data)
+              //window.alert(resp.data.user.id.toString())
+              //console.log(resp.data.user.id.toString())
+              //console.log(resp.data)
               //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
-
+              sessionStorage.setItem("token", 'true')
 
               localStorage.setItem('studentId',resp.data.user.id.toString())
               let identity = resp.data.user.authority.toString()
 
-              window.alert("identity:"+identity)
+              //window.alert("identity:"+identity)
 
               //may not work
               this.userToken = 'Bearer ' + resp.data.token;
-              window.alert(this.userToken)
-              // 将用户token保存到vuex中
-              // this.changeLogin({ Authorization: this.userToken });
+              //window.alert(this.userToken)
 
               switch (identity) {
                 case "1":
@@ -114,10 +112,9 @@ export default {
                   this.$router.push({path: '/assistant'});
                   break;
                 case "5":
-                  this.$router.push("/admin");
+                  this.$router.push({path: '/admin'});
                   break;
               }
-              //this.$router.push({path: '/student'})
 
             }
           } else {
