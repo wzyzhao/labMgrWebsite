@@ -10,12 +10,18 @@ import Assistant from "@/views/Assistant";
 import ReportOne from '../components/Student/ReportOne'
 import ClazzOne from '../components/Clazz/ClazzOne'
 import ExperimentList from "@/components/Student/ExperimentList";
+import PDF from "@/components/PDF";
 const routes = [
     // 下面都是固定的写法
     {
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+        path: '/pdf',
+        name: 'PDF',
+        component: PDF
     },
     {
       path: '/',

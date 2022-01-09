@@ -6,7 +6,8 @@
         border
     >
       <template #extra>
-        <el-button type="primary" size="small">退出编辑</el-button>
+        <el-button type="primary" size="small" v-if="this.dataForm.showInput==false" @click="this.dataForm.showInput=true">编辑信息</el-button>
+        <el-button type="primary" size="small" v-if="this.dataForm.showInput==true" @click="this.dataForm.showInput=false">退出编辑</el-button>
       </template>
       <el-descriptions-item align="center" width="100px">
         <template #label>
@@ -41,7 +42,7 @@
           <el-icon><iphone /></el-icon>
           电话号码
         </template>
-        <el-input v-model="dataForm.telephone" placeholder="Please input" class="items">
+        <el-input v-if="dataForm.showInput==true" clearable v-model="dataForm.telephone" placeholder="请输入电话号码">
           <template #prepend>+86</template>
         </el-input>
       </el-descriptions-item>
@@ -55,7 +56,6 @@
         <el-icon><location /></el-icon>
         常用地址
       </template>
-      <el-icon><position /></el-icon>
     </el-descriptions-item>
   </el-descriptions>
   <el-descriptions
@@ -69,6 +69,7 @@
         个人简介
       </template>
       <el-input
+          v-if="dataForm.showInput==true"
           v-model="dataForm.personalProfile"
           maxlength="200"
           placeholder="请输入个人简介，不超过200字"
@@ -86,21 +87,21 @@
   >
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')"
-      >提交</el-button
-      >
-      <el-button @click="resetForm('dataForm')">重置</el-button>
+      >提交
+      </el-button>
     </el-form-item>
 
   </el-form>
 </template>
 
 <script scoped>
-import {User, Iphone, Location, Tickets, Position} from '@element-plus/icons'
+import {User, Iphone, Location, Tickets} from '@element-plus/icons'
 export default {
-  components:{User, Iphone, Location, Tickets,Position},
+  components:{User, Iphone, Location, Tickets},
   data() {
     return {
       dataForm:{
+        showInput:false,
         telephone:'',
         personalProfile:''
       }
@@ -109,9 +110,6 @@ export default {
   methods: {
   submitForm() {
 
-    },
-    resetForm() {
-      this.$refs.formName.resetFields()
     },
   },
 }

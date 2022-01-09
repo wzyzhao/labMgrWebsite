@@ -23,14 +23,10 @@
               <span class="menu">个人资料设置</span>
             </el-menu-item>
             <el-menu-item index="2">
-              <el-icon class="menu"><setting /></el-icon>
-              <span class="menu">个人头像设置</span>
-            </el-menu-item>
-            <el-menu-item index="3">
               <el-icon class="menu"><refresh /></el-icon>
               <span class="menu">登录密码重置</span>
             </el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="3">
             <el-icon class="menu"><back /></el-icon>
             <span class="menu" style="position: relative;left:40px">返回首页</span>
             </el-menu-item>
@@ -41,9 +37,8 @@
     <el-container>
       <el-main>
         <UserProfile v-if="this.choice === 1"></UserProfile>
-        <UserAvatar v-if="this.choice === 2"></UserAvatar>
-        <UserPasswordSetting v-if="this.choice === 3"></UserPasswordSetting>
-        <Student v-if="this.choice === 4"></Student>
+        <UserPasswordSetting v-if="this.choice === 2"></UserPasswordSetting>
+        <Student v-if="this.choice === 3"></Student>
       </el-main>
     </el-container>
   </el-container>
@@ -52,12 +47,11 @@
 <script>
 import {SwitchButton,Refresh,Setting,Back} from "@element-plus/icons";
 import UserProfile from "@/components/UserInfo/UserProfile";
-import UserAvatar from "@/components/UserInfo/UserAvatar";
 import UserPasswordSetting from "@/components/UserInfo/UserPasswordSetting";
 import Student from "@/views/Student";
 
 export default {
-  components: { SwitchButton, Refresh, Setting, Back, UserProfile, UserAvatar, UserPasswordSetting, Student},
+  components: { SwitchButton, Refresh, Setting, Back, UserProfile, UserPasswordSetting, Student},
   data(){
     return {
       choice: 1,
@@ -75,9 +69,6 @@ export default {
           this.choice = 2;
           break;
         case "3":
-          this.choice = 3;
-          break;
-        case "4":
           this.$router.push("/student");
           break;
       }

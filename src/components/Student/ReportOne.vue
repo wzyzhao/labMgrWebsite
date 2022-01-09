@@ -473,12 +473,13 @@
           <el-button type="primary" @click="saveReport" style="position: relative;top:60px">
             暂存<el-icon class="el-icon--right"><Upload /></el-icon>
         </el-button>
-        <br/>
+        <div style="min-height: 600px;position: relative;top:100px" ref="myEchart"></div>
       </el-main>
     </el-container>
 </template>
 
 <script>
+import * as echarts from 'echarts';
 import Header from "@/components/common/Header";
 import { Back,Upload } from '@element-plus/icons';
 import axios from "axios";
@@ -489,6 +490,84 @@ export default {
   },
   data() {
     return {
+      chart: null,
+      option: {
+        title: {
+          x: '150',                 // 水平安放位置，默认为左对齐，可选为：
+          // 'center' ¦ 'left' ¦ 'right'
+          // ¦ {number}（x坐标，单位px）
+          y: 'top',
+          //textAlign: null
+          backgroundColor: 'rgba(0,0,0,0)',
+          borderColor: '#ccc',       // 标题边框颜色
+          borderWidth: 0,            // 标题边框线宽，单位px，默认为0（无边框）
+          padding: 5,                // 标题内边距，单位px，默认各方向内边距为5，
+          itemGap: 10,               // 主副标题纵向间隔，单位px，默认为10，
+          textStyle: {
+            fontSize: 18,
+            fontWeight: 'bolder',
+            color: '#66d6ff'          // 主标题文字颜色
+          },
+          text: '实验结果折线图'
+        },
+        color: ['#ff7f50','#87cefa','#da70d6','#32cd32','#6495ed',
+          '#ff69b4','#ba55d3','#cd5c5c','#ffa500','#40e0d0'],
+        tooltip : {},
+        //图例--折线提示提示
+        legend: {
+          x: 'center',
+          y: '30',
+          borderColor: '#6699FF',//边框颜色
+          textStyle: {
+            color: '#1e90ff'          // 图例文字颜色
+          },
+          data:['净现金流量','累计净现金流量','净现金流量（现值）','累计净现金流量（现值）']
+        },
+        //右上角的工具箱
+        toolbox: {
+          x:'80%',
+          y:'top',
+          show : true,
+          feature : {
+            mark : {show: true},
+            //是否可以保存图片
+            saveAsImage : {show: true},
+            //dataView : '数据视图',
+            dataView:{show: true},
+          }
+        },
+        calculable : true,
+        xAxis:{
+          data:['1','2','3','4','5','6']
+        },
+        yAxis : [
+          {
+            type : 'value',
+            name:'单位：千元',
+            min:'-1000',
+            max:'',
+            splitNumber: 20
+          }
+        ],
+        series : [{
+          type:'line',
+          name:'净现金流量',
+          data:[],
+        },{
+          type:'line',
+          name:'累计净现金流量',
+          data:[]
+        },{
+          type:'line',
+          name:'净现金流量（现值）',
+          data:[]
+        },{
+          type:'line',
+          name:'累计净现金流量（现值）',
+          data:[]
+        },
+        ]
+      },
       showInput: '',
       oldData:{},
       formData:{
@@ -693,7 +772,6 @@ export default {
   },
 
   methods: {
-
     jumpToStudent() {
       this.$router.push('/student')
     },
@@ -856,6 +934,20 @@ export default {
         //localStorage.setItem('accessToken', 'Bearer ' + resp.data.result.accessToken)
         console.log(resp);
         console.log(result);
+        for (let i=0;i<4;i++)
+        {
+          this.option.series[i].data.push(this.tableData6[i].one);
+          this.option.series[i].data.push(this.tableData6[i].two);
+          this.option.series[i].data.push(this.tableData6[i].three);
+          this.option.series[i].data.push(this.tableData6[i].four);
+          this.option.series[i].data.push(this.tableData6[i].five);
+          this.option.series[i].data.push(this.tableData6[i].six)
+        }
+        this.option.yAxis[0].max=Math.ceil(1000)+500;
+        //Y轴最大值的设置：向上取整并家500
+        this.chart = echarts.init(this.$refs.myEchart);
+        // 把配置和数据放这里
+        this.chart.setOption(this.option)
       }).catch(() => {
         this.$message({
           message: '提交失败，请重试',
