@@ -13,7 +13,8 @@
       <el-button @click="jumpToTargetReport">搜索</el-button>
     </el-col>
     <el-col span="8">
-      <el-button style="position: relative;left: 1100px" @click="getReportList">刷新实验报告列表</el-button>
+      <el-button style="position: relative;left: 1100px" v-if="this.clicked===true" @click="getReportList">获取实验报告列表</el-button>
+      <el-button style="position: relative;left: 1100px" v-if="this.clicked===false" @click="refreshReportList">刷新实验报告列表</el-button>
     </el-col>
   </el-row>
 
@@ -50,43 +51,8 @@
 export default {
   data() {
     return {
+      clicked:true,
       tableData: [
-        {
-          reportId: '',
-          reportName: '独立方案评价指标计算实验',
-          completionState: '完成',
-          address: '济事楼000',
-          teacherId: '',
-          reportScore: '',
-          tag: 'Home',
-        },
-        {
-          reportId: '2021-11-02',
-          reportName: '软件规模度量实验',
-          completionState: '完成',
-          address: '济事楼001',
-          teacherId: '',
-          reportScore: '',
-          tag: 'Office',
-        },
-        {
-          reportId: '2021-11-04',
-          reportName: '财务分析实验',
-          completionState: '完成',
-          address: '济事楼002',
-          teacherId: '',
-          reportScore: null,
-          tag: 'Home',
-        },
-        {
-          reportId: '2021-11-01',
-          reportName: '风险分析实验',
-          completionState: '完成',
-          address: '济事楼003',
-          teacherId: '',
-          reportScore: null,
-          tag: 'Office',
-        },
       ],
       searchReportId:'',
     }
@@ -111,7 +77,45 @@ export default {
     },
     getReportList() {
       let sid=localStorage.getItem('studentId')
-      window.alert(sid)
+      this.clicked=false
+      //window.alert(sid)
+      this.$axios
+          .get('/report/findAllByStudentId/'+sid.toString(), {
+
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+            //window.alert(resp.data.length)
+            for (let i=resp.data.length-1;i>=0;i--) {
+              this.tableData.push({
+                reportId: '',
+                reportName: '软件规模度量实验',
+                completionState: '完成',
+                address: '济事楼001',
+                teacherId: '',
+                reportScore: '',
+                tag: 'Office',
+              },)
+              this.tableData[resp.data.length-1-i].reportId=resp.data[i].reportId
+              if (resp.data[i].reportScore==null) {
+                this.tableData[resp.data.length-1-i].reportScore='未批阅'
+                this.tableData[resp.data.length-1-i].teacherId='暂无'
+              }
+              else {
+                this.tableData[resp.data.length-1-i].reportScore=resp.data[i].reportScore
+                this.tableData[resp.data.length-1-i].teacherId=resp.data[i].teacherId
+              }
+            }
+          })
+          .catch(failResponse => {
+
+          })
+    },
+    refreshReportList() {
+      let sid=localStorage.getItem('studentId')
+      this.clicked=false
+      //window.alert(sid)
       this.$axios
           .get('/report/findAllByStudentId/'+sid.toString(), {
 
@@ -120,21 +124,33 @@ export default {
             //window.alert(resp.data.length)
             console.log(resp)
             console.log(resp.data)
-            for (let i=0;i<4;i++) {
-              this.tableData[i].reportId=resp.data[i].reportId
-              if (this.tableData[i].reportScore==null) {
-                this.tableData[i].reportScore='未批阅'
+            //window.alert(resp.data.length)
+            this.tableData.dispose()
+            for (let i=resp.data.length-1;i>=0;i--) {
+              this.tableData.push({
+                reportId: '',
+                reportName: '软件规模度量实验',
+                completionState: '完成',
+                address: '济事楼001',
+                teacherId: '',
+                reportScore: '',
+                tag: 'Office',
+              },)
+              this.tableData[resp.data.length-1-i].reportId=resp.data[i].reportId
+              if (resp.data[i].reportScore==null) {
+                this.tableData[resp.data.length-1-i].reportScore='未批阅'
+                this.tableData[resp.data.length-1-i].teacherId='暂无'
               }
               else {
-                this.tableData[i].reportScore=resp.data[i].reportScore
+                this.tableData[resp.data.length-1-i].reportScore=resp.data[i].reportScore
+                this.tableData[resp.data.length-1-i].teacherId=resp.data[i].teacherId
               }
-              this.tableData[i].teacherId=resp.data[i].teacherId
             }
           })
           .catch(failResponse => {
 
           })
-    }
+    },
   },
 }
 </script>

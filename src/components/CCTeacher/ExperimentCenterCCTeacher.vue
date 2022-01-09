@@ -12,7 +12,7 @@
           <span>独立方案评价指标实验</span>
           <div class="bottom">
 
-            <el-button size="small" type="primary">填写报告</el-button>
+            <el-button size="small" type="primary">查看实验</el-button>
 
             <el-button size="small" type="info" @click="dialogVisible = true"
             >上传实验指导书</el-button
@@ -67,7 +67,7 @@
           <span>软件规模度量实验</span>
           <div class="bottom">
 
-            <el-button size="small" type="primary">填写报告</el-button>
+            <el-button size="small" type="primary">查看实验</el-button>
 
             <el-button size="small" type="info" @click="dialogVisible = true"
             >上传实验指导书</el-button
@@ -122,7 +122,7 @@
           <span>财务分析实验</span>
           <div class="bottom">
 
-            <el-button size="small" type="primary">填写报告</el-button>
+            <el-button size="small" type="primary">查看实验</el-button>
 
             <el-button size="small" type="info" @click="dialogVisible = true"
             >上传实验指导书</el-button
@@ -177,7 +177,7 @@
           <span>风险分析实验</span>
           <div class="bottom">
 
-            <el-button size="small" type="primary">填写报告</el-button>
+            <el-button size="small" type="primary">查看实验</el-button>
 
             <el-button size="small" type="info" @click="dialogVisible = true"
             >上传实验指导书</el-button

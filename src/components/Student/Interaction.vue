@@ -1,80 +1,33 @@
 <template>
-  <el-form
-      ref="ruleForm"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="120px"
-      class="demo-ruleForm"
-  >
-    <el-form-item label="反馈主题" prop="title">
-      <el-input v-model="ruleForm.name"></el-input>
-    </el-form-item>
 
-    <el-form-item label="反馈类型" prop="feedbackType">
-      <el-select position="left" v-model="ruleForm.feedbackType" placeholder="请选择反馈类型">
-        <el-option label="实验改进" value="1"></el-option>
-        <el-option label="成绩复合" value="2"></el-option>
-        <el-option label="设备故障申报" value="3"></el-option>
-        <el-option label="问题咨询" value="4"></el-option>
-      </el-select>
-    </el-form-item>
 
-    <el-form-item label="时间选择" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker
-              v-model="ruleForm.date1"
-              type="date"
-              placeholder="日期"
-              style="width: 100%"
-          ></el-date-picker>
-        </el-form-item>
-      </el-col>
-      <el-col class="line" :span="5">-</el-col>
-      <el-col :span="11">
-        <el-form-item prop="date2">
-          <el-time-picker
-              v-model="ruleForm.date2"
-              placeholder="时间"
-              style="width: 100%"
-          ></el-time-picker>
-        </el-form-item>
-      </el-col>
-    </el-form-item>
+    <el-button style="position: relative;left: 700px" v-if="this.clicked===true" @click="getNoticeList">获取公告列表</el-button>
+    <el-button style="position: relative;left: 700px" v-if="this.clicked===false" @click="refreshNoticeList">刷新公告列表</el-button>
 
-    <el-form-item label="选择" prop="delivery">
-      <el-switch v-model="ruleForm.delivery" active-color="#13ce66"></el-switch>
-    </el-form-item>
 
-    <el-form-item label="发送对象" prop="type">
-      <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox label="责任教师" name="type"></el-checkbox>
-        <el-checkbox label="教师" name="type"></el-checkbox>
-        <el-checkbox label="助教" name="type"></el-checkbox>
-        <el-checkbox label="公开" name="type"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-
-    <el-form-item label="反馈详情" prop="feedbackDetail">
-      <el-input v-model="ruleForm.feedbackDetail" type="textarea"></el-input>
-    </el-form-item>
-
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')"
-      >提交</el-button
-      >
-      <el-button @click="resetForm('ruleForm')">取消</el-button>
-    </el-form-item>
-
-  </el-form>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column fixed prop="time" label="日期" width="150" />
+    <el-table-column prop="subject" label="公告标题" width="150" />
+    <el-table-column prop="teacherName" label="发布教师名称" width="130" />
+    <el-table-column prop="content" label="公告内容" width="1100" />
+    <el-table-column fixed="right" label="操作" width="160">
+      <template #default>
+        <el-button type="text" size="small" @click="showContent"
+        >查看详细内容</el-button
+        >
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
-<script scope>
+<script scoped>
+import { ElMessageBox, ElMessage } from 'element-plus'
 export default {
   data() {
     return {
+      clicked: true,
       ruleForm: {
-        title: '',
+        subject: '',
         feedbackType: '',
         date1: '',
         date2: '',
@@ -83,61 +36,94 @@ export default {
         resource: '',
         feedbackDetail: '',
       },
-      rules: {
-        title: [
-          {
-            required: true,
-            message: '请输入主题',
-            trigger: 'blur',
-          },
-          {
-            min: 3,
-            max: 5,
-            message: 'Length should be 3 to 5',
-            trigger: 'blur',
-          },
-        ],
-        feedbackType: [
-          {
-            required: true,
-            message: '请选择反馈的类别',
-            trigger: 'change',
-          },
-        ],
-        date1: [
-          {
-            type: 'date',
-            required: true,
-            message: 'Please pick a date',
-            trigger: 'change',
-          },
-        ],
-        date2: [
-          {
-            type: 'date',
-            required: true,
-            message: 'Please pick a time',
-            trigger: 'change',
-          },
-        ],
-        resource: [
-          {
-            required: true,
-            message: 'Please select activity resource',
-            trigger: 'change',
-          },
-        ],
-        feedbackDetail: [
-          {
-            required: true,
-            message: '请输入您的反馈',
-            trigger: 'blur',
-          },
-        ],
-      },
+      tableData: [
+
+      ],
     }
   },
   methods: {
+    getNoticeList() {
+      this.clicked=false
+      //window.alert(sid)
+      this.$axios
+          .get('/notice/find', {
+
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+            //window.alert(resp.data.length)
+            for (let i=resp.data.length-1;i>=0;i--) {
+              this.tableData.push({
+                time: '',
+                subject: '',
+                teacherName: '',
+                content: '',
+              },)
+
+              this.tableData[resp.data.length-1-i].time=resp.data[i].time
+              this.tableData[resp.data.length-1-i].subject=resp.data[i].subject
+              this.tableData[resp.data.length-1-i].teacherName=resp.data[i].teacherName
+              this.tableData[resp.data.length-1-i].content=resp.data[i].content
+            }
+          })
+          .catch(failResponse => {
+
+          })
+    },
+    refreshNoticeList() {
+      this.clicked=false
+      this.tableData.dispose()
+      this.$axios
+          .get('/notice/find', {
+
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+            //window.alert(resp.data.length)
+            for (let i=resp.data.length-1;i>=0;i--) {
+              this.tableData.push({
+                time: '',
+                subject: '',
+                teacherName: '',
+                content: '',
+              },)
+
+              this.tableData[resp.data.length-1-i].time=resp.data[i].time
+              this.tableData[resp.data.length-1-i].subject=resp.data[i].subject
+              this.tableData[resp.data.length-1-i].teacherName=resp.data[i].teacherName
+              this.tableData[resp.data.length-1-i].content=resp.data[i].content
+            }
+          })
+          .catch(failResponse => {
+
+          })
+    },
+    showContent() {
+
+      ElMessageBox.confirm(
+          'proxy will permanently delete the file. Continue?',
+          'Warning',
+          {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning',
+          }
+      )
+          .then(() => {
+            ElMessage({
+              type: 'success',
+              message: 'Delete completed',
+            })
+          })
+          .catch(() => {
+            ElMessage({
+              type: 'info',
+              message: 'Delete canceled',
+            })
+          })
+    },
     submitForm(formName) {
       /*
       this.$refs[formName].validate((valid) => {

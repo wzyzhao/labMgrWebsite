@@ -35,8 +35,8 @@
 
           <div class="bottom">
 
-            <el-button size="small" type="primary" @click="checkClass">查看班级</el-button>
-
+            <el-button size="small" type="primary" @click="checkClass(1)">查看班级</el-button>
+            <el-button size="small" type="info" @click="assignAssistant(1)">分配助教</el-button>
             <el-button size="small" type="info" @click="addStudent">添加学生</el-button>
 
 
@@ -77,7 +77,8 @@
 
           <div class="bottom">
 
-            <el-button size="small" type="primary">查看班级</el-button>
+            <el-button size="small" type="primary" @click="checkClass(2)">查看班级</el-button>
+            <el-button size="small" type="info" @click="assignAssistant(2)">分配助教</el-button>
             <el-button size="small" type="info">添加学生</el-button>
 
 
@@ -160,32 +161,59 @@ export default defineComponent({
   },
   data(){
     return {
+      cid:'',
+      aid:'',
+      acid:'',
     }
   },
   methods: {
-    checkClass(){
-      ElMessageBox.confirm(
-          '是否关闭该门课程?',
-          'Warning',
-          {
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            type: 'warning',
-          }
-      )
-          .then(() => {
-            this.closeCourse1('软件工程经济学')
+    checkClass(param) {
+      window.alert(param)
+      this.$axios
+          .get('/class/studentList', {
+            params:{
+              classId:param.toString(),
+            }
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+          })
+          .catch(failResponse => {
+
+          })
+    },
+    assignAssistant(param){
+      ElMessageBox.prompt('请输入助教ID', 'Tip', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        inputErrorMessage: '无效的助教ID',
+      })
+          .then(({ value }) => {
+            this.$axios
+                .post('/assign/assistant', {
+                  assistantId:value,
+                  classId:param.toString(),
+                })
+                .then(resp => {
+                  console.log(resp)
+                  console.log(resp.data)
+                })
+                .catch(failResponse => {
+
+                })
             ElMessage({
               type: 'success',
-              message: '已关闭此课程',
+              message: `成功分配助教:${value}`,
             })
           })
           .catch(() => {
             ElMessage({
               type: 'info',
-              message: '取消关闭操作',
+              message: '取消操作',
             })
           })
+
     },
     jumpToClassOne() {
       this.$router.push()

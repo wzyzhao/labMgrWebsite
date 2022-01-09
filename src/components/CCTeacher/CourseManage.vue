@@ -91,6 +91,7 @@
 <script scoped>
 import { defineComponent, ref } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import axios from "axios";
 
 export default defineComponent({
   setup() {
@@ -119,7 +120,26 @@ export default defineComponent({
   },
   methods: {
     checkCourse(){
+      this.$axios
+          .get('/course/state/find',{
+            params:{
+              courseName:'软件工程经济学',
+            }
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+            if (resp.data.CourseState==1){
+              window.alert('课程进行中')
+            }
+            else{
+              window.alert('课程已关闭')
+            }
 
+          })
+          .catch(failResponse => {
+
+          })
     },
     closeCourse () {
       ElMessageBox.confirm(
@@ -145,8 +165,21 @@ export default defineComponent({
             })
           })
     },
-    closeCourse1(CourseName){
+    closeCourse1(cname){
+      axios
+          .post('/course/state/update', {
 
+            courseName:cname,
+
+          }).then(resp => {
+        console.log(resp);
+        console.log(resp.data);
+      }).catch(() => {
+        this.$message({
+          message: '修改失败，请重试',
+          type: 'error'
+        })
+      })
     },
   },
 })
