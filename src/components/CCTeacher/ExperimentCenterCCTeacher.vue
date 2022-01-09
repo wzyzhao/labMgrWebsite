@@ -14,43 +14,9 @@
 
             <el-button size="small" type="primary">查看实验</el-button>
 
-            <el-button size="small" type="info" @click="dialogVisible = true"
+            <el-button size="small" type="info" @click="jumpToPDF"
             >上传实验指导书</el-button
             >
-
-            <el-dialog
-                v-model="dialogVisible"
-                title="上传实验指导书"
-                width="30%"
-                :before-close="handleClose"
-            >
-              <span>
-                <el-upload
-                    class="upload-demo"
-                    drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    multiple
-                >
-    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-    <div class="el-upload__text">
-      将文件拖至此 或者 <em>点击上传</em>
-    </div>
-    <template #tip>
-      <div class="el-upload__tip">
-        文件格式应为pdf
-      </div>
-    </template>
-  </el-upload>
-              </span>
-              <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-        >确认</el-button
-        >
-      </span>
-              </template>
-            </el-dialog>
 
           </div>
         </div>
@@ -69,43 +35,11 @@
 
             <el-button size="small" type="primary">查看实验</el-button>
 
-            <el-button size="small" type="info" @click="dialogVisible = true"
+            <el-button size="small" type="info" @click="jumpToPDF"
             >上传实验指导书</el-button
             >
 
-            <el-dialog
-                v-model="dialogVisible"
-                title="上传实验指导书"
-                width="30%"
-                :before-close="handleClose"
-            >
-              <span>
-                <el-upload
-                    class="upload-demo"
-                    drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    multiple
-                >
-    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-    <div class="el-upload__text">
-      将文件拖至此 或者 <em>点击上传</em>
-    </div>
-    <template #tip>
-      <div class="el-upload__tip">
-        文件格式应为pdf
-      </div>
-    </template>
-  </el-upload>
-              </span>
-              <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-        >确认</el-button
-        >
-      </span>
-              </template>
-            </el-dialog>
+
 
           </div>
         </div>
@@ -124,43 +58,11 @@
 
             <el-button size="small" type="primary">查看实验</el-button>
 
-            <el-button size="small" type="info" @click="dialogVisible = true"
+            <el-button size="small" type="info" @click="jumpToPDF"
             >上传实验指导书</el-button
             >
 
-            <el-dialog
-                v-model="dialogVisible"
-                title="上传实验指导书"
-                width="30%"
-                :before-close="handleClose"
-            >
-              <span>
-                <el-upload
-                    class="upload-demo"
-                    drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    multiple
-                >
-    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-    <div class="el-upload__text">
-      将文件拖至此 或者 <em>点击上传</em>
-    </div>
-    <template #tip>
-      <div class="el-upload__tip">
-        文件格式应为pdf
-      </div>
-    </template>
-  </el-upload>
-              </span>
-              <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-        >确认</el-button
-        >
-      </span>
-              </template>
-            </el-dialog>
+
 
           </div>
         </div>
@@ -179,45 +81,9 @@
 
             <el-button size="small" type="primary">查看实验</el-button>
 
-            <el-button size="small" type="info" @click="dialogVisible = true"
+            <el-button size="small" type="info" @click="jumpToPDF"
             >上传实验指导书</el-button
             >
-
-            <el-dialog
-                v-model="dialogVisible"
-                title="上传实验指导书"
-                width="30%"
-                :before-close="handleClose"
-            >s
-              <span>
-                <el-upload
-                    class="upload-demo"
-                    drag
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    accept="ins/pdf,ins/docx,ins/doc"
-                    multiple
-                >
-    <el-icon class="el-icon--upload"><upload-filled /></el-icon>
-    <div class="el-upload__text">
-      将文件拖至此 或者 <em>点击上传</em>
-    </div>
-    <template #tip>
-      <div class="el-upload__tip">
-        文件格式应为pdf
-      </div>
-    </template>
-  </el-upload>
-              </span>
-              <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-        >确认</el-button
-        >
-      </span>
-              </template>
-            </el-dialog>
-
           </div>
         </div>
       </el-card>
@@ -253,34 +119,12 @@ export default defineComponent({
   data(){
     //imgUrl:require('../../assets/img/bg/experimentBG.jpeg')
     return {
-      fileList: [
-        {
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-        },
-        {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-        },
-      ],
+
     }
   },
   methods: {
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview(file) {
-      console.log(file)
-    },
-    handleExceed(files, fileList) {
-      this.$message.warning(
-          `The limit is 3, you selected ${
-              files.length
-          } files this time, add up to ${files.length + fileList.length} totally`
-      )
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`Cancel the transfert of ${file.name} ?`)
+    jumpToPDF() {
+      this.$router.push('/pdf')
     },
   },
 })

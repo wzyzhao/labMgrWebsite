@@ -85,23 +85,28 @@ export default {
             } else {
               sessionStorage.setItem("token", 'true')
               localStorage.setItem('currentIdentity',resp.data.user.authority.toString())
-              localStorage.setItem('studentId',resp.data.user.id.toString())
+
               let identity = resp.data.user.authority.toString()
 
               switch (identity) {
                 case "1":
+                  localStorage.setItem('studentId',resp.data.user.id.toString())
                   this.$router.push({path: '/student'});
                   break;
                 case "2":
+                  localStorage.setItem('teacherId',resp.data.user.id.toString())
                   this.$router.push({path: '/teacher'});
                   break;
                 case "3":
+                  localStorage.setItem('CCTeacherId',resp.data.user.id.toString())
                   this.$router.push({path: '/teacher'});
                   break;
                 case "4":
+                  localStorage.setItem('assistantId',resp.data.user.id.toString())
                   this.$router.push({path: '/assistant'});
                   break;
                 case "5":
+                  localStorage.setItem('adminId',resp.data.user.id.toString())
                   this.$router.push({path: '/admin'});
                   break;
               }
