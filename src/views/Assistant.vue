@@ -1,13 +1,13 @@
 <template>
   <Header></Header>
-  <SideBar></SideBar>
+  <SideBarAssistant></SideBarAssistant>
 </template>
 
 <script>
-import SideBar from "@/components/common/SideBar";
+import SideBarAssistant from "@/components/common/SideBarAssistant";
 import Header from "@/components/common/Header";
 export default {
-  components: {Header, SideBar},
+  components: {Header, SideBarAssistant},
 }
 </script>
 

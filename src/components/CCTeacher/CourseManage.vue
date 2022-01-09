@@ -22,7 +22,7 @@
 
             <el-button size="small" type="primary" @click="checkCourse">查看课程</el-button>
 
-            <el-button size="small" type="info" @click="closeCourse">关闭课程</el-button>
+            <el-button size="small" type="info" @click="closeCourse1('软件工程经济学')">开关课程</el-button>
 
           </div>
         </div>
@@ -39,16 +39,17 @@
         <div style="padding: 20px">
           <span>软件工程</span>
           <el-result
-              icon="error"
-              title="课程未开启"
+              icon="success"
+              title="课程进行中"
               sub-title="Please follow the instructions"
           >
+
           </el-result>
           <div class="bottom">
 
             <el-button size="small" type="primary" @click="checkCourse">查看课程</el-button>
 
-            <el-button size="small" type="info" @click="closeCourse">关闭课程</el-button>
+            <el-button size="small" type="info" @click="closeCourse">开关课程</el-button>
 
           </div>
         </div>
@@ -74,7 +75,7 @@
 
             <el-button size="small" type="primary" @click="checkCourse">查看课程</el-button>
 
-            <el-button size="small" type="info" @click="closeCourse">关闭课程</el-button>
+            <el-button size="small" type="info" @click="closeCourse">开关课程</el-button>
 
           </div>
         </div>
@@ -129,11 +130,11 @@ export default defineComponent({
           .then(resp => {
             console.log(resp)
             console.log(resp.data)
-            if (resp.data.CourseState==1){
-              window.alert('课程进行中')
+            if (resp.data.CourseState===1){
+              ElMessage('课程进行中')
             }
             else{
-              window.alert('课程已关闭')
+              ElMessage('课程已关闭')
             }
 
           })
@@ -166,20 +167,19 @@ export default defineComponent({
           })
     },
     closeCourse1(cname){
-      axios
+
+      this.$axios
           .post('/course/state/update', {
+            courseName:'软件工程经济学',
+          })
+          .then(resp => {
+            console.log(resp)
+            console.log(resp.data)
+            ElMessage('课程状态已修改')
+          })
+          .catch(failResponse => {
 
-            courseName:cname,
-
-          }).then(resp => {
-        console.log(resp);
-        console.log(resp.data);
-      }).catch(() => {
-        this.$message({
-          message: '修改失败，请重试',
-          type: 'error'
-        })
-      })
+          })
     },
   },
 })

@@ -1,6 +1,5 @@
 <template>
 
-  <el-button style="position: relative; left: 700px" type="primary">新建班级</el-button>
   <el-row gutter="20">
 
     <el-col span="8">
@@ -120,17 +119,13 @@
 
           <div class="bottom">
 
-            <el-button size="small" type="primary" @click="checkClass(3)">查看班级</el-button>
-            <el-button size="small" type="info" @click="assignAssistant(3)">分配助教</el-button>
-            <el-button size="small" type="info" @click="addStudent(3)">添加学生</el-button>
+            <el-button size="small" type="primary">填写报告</el-button>
+            <el-button size="small" type="primary">添加学生</el-button>
 
 
           </div>
         </div>
       </el-card>
-
-
-
     </el-col>
 
 
@@ -173,7 +168,7 @@ export default defineComponent({
   },
   methods: {
     checkClass(param) {
-      //window.alert(param)
+      window.alert(param)
       let routerJump =this.$router.resolve({path:'/studentList'})
       window.open(routerJump.href,'_blank')
       this.$axios
