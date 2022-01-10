@@ -12,7 +12,8 @@
       <el-button @click="jumpToTargetReport">搜索</el-button>
     </el-col>
     <el-col span="8">
-      <el-button style="position: relative;left: 1100px;top:10px" @click="getReportList">刷新实验报告列表</el-button>
+      <el-button style="position: relative;left: 1100px;top:10px" v-if="this.clicked===true" @click="getReportList">获取实验报告列表</el-button>
+      <el-button style="position: relative;left: 1100px;top:10px" v-if="this.clicked===false" @click="refreshReportList">刷新实验报告列表</el-button>
     </el-col>
   </el-row>
 
@@ -23,11 +24,9 @@
     <el-table-column prop="address" label="实验地址" width="200" />
     <el-table-column prop="teacherId" label="批改教师编号" width="190" />
     <el-table-column prop="reportScore" label="最终成绩" width="120" />
-    <el-table-column fixed="right" label="操作" width="350">
+    <el-table-column fixed="right" label="" width="350">
       <template #default>
-        <el-button size="small" type="info" round @click="handleClick">查看详细成绩</el-button>
-        <el-button size="small" type="primary" round>下载报告</el-button>
-        <el-button size="small" type="success" round>查看答案</el-button>
+
       </template>
     </el-table-column>
   </el-table>
@@ -56,43 +55,9 @@ import axios from "axios";
 export default {
   data() {
     return {
+      clicked:true,
       tableData: [
-        {
-          reportId: '',
-          reportName: '独立方案评价指标计算实验',
-          completionState: '完成',
-          address: '济事楼000',
-          teacherId: '',
-          reportScore: '',
-          tag: 'Home',
-        },
-        {
-          reportId: '2021-11-02',
-          reportName: '软件规模度量实验',
-          completionState: '完成',
-          address: '济事楼001',
-          teacherId: '',
-          reportScore: '',
-          tag: 'Office',
-        },
-        {
-          reportId: '2021-11-04',
-          reportName: '财务分析实验',
-          completionState: '完成',
-          address: '济事楼002',
-          teacherId: '',
-          reportScore: null,
-          tag: 'Home',
-        },
-        {
-          reportId: '2021-11-01',
-          reportName: '风险分析实验',
-          completionState: '完成',
-          address: '济事楼003',
-          teacherId: '',
-          reportScore: null,
-          tag: 'Office',
-        },
+
       ],
       searchReportId:'',
     }
@@ -102,43 +67,101 @@ export default {
       console.log('click')
     },
     jumpToTargetReport() {
-      window.alert(this.searchReportId)
+      //window.alert(this.searchReportId)
       this.$axios
-          .get('/report/findByReportId/'+this.searchReportId.toString(), {
-
+          .post('/report/findByReportId/'+this.searchReportId.toString(), {
+            reportId:this.searchReportId.toString(),
           })
           .then(resp => {
             console.log(resp)
             console.log(resp.data)
-
+            this.$router.push('/reportOne')
           })
           .catch(failResponse => {
 
           })
     },
     getReportList() {
+      this.clicked=false
       let sid=localStorage.getItem('studentId')
-      window.alert(sid)
       this.$axios
-          .get('/report/findAllByStudentId/'+sid.toString(), {
-
+          .get('/report/findAllByStudentId/'+'1952108', {
+            params:{
+              studentId:'1952108',
+            }
           })
           .then(resp => {
             //window.alert(resp.data.length)
             console.log(resp)
             console.log(resp.data)
-            console.log(111)
             //console.log(resp.data)
 
-            for (let i=0;i<4;i++) {
+            for (let i=0;i<resp.data.length;i++) {
+              this.tableData.push({
+                reportId: '',
+                reportName: '独立方案评价指标计算实验',
+                completionState: '完成',
+                address: '济事楼0'+i.toString(),
+                teacherId: '',
+                reportScore: null,
+                tag: 'Home',
+              },)
+              this.tableData[i].assistantId=resp.data[i].assistantId
               this.tableData[i].reportId=resp.data[i].reportId
-              if (this.tableData[i].reportScore==null) {
-                this.tableData[i].reportScore='未批阅'
+              if (resp.data[i].reportScore==null){
+                this.tableData[i].reportScore='未批改'
+                this.tableData[i].teacherId='/'
               }
-              else {
+              else{
+                this.tableData[i].reportScore=resp.data[i].reportScore
+                this.tableData[i].teacherId=resp.data[i].teacherId
+              }
+              this.tableData[i].studentId=resp.data[i].studentId
+
+
+            }
+          })
+          .catch(failResponse => {
+
+          })
+    },
+    refreshReportList() {
+      this.clicked=false
+      this.tableData.dispose()
+      let sid=localStorage.getItem('studentId')
+      this.$axios
+          .get('/report/findAllByStudentId/'+'1952108', {
+            params:{
+              studentId:'1952108',
+            }
+          })
+          .then(resp => {
+            //window.alert(resp.data.length)
+            console.log(resp)
+            console.log(resp.data)
+            //console.log(resp.data)
+
+            for (let i=0;i<resp.data.length;i++) {
+              this.tableData.push({
+                reportId: '',
+                reportName: '独立方案评价指标计算实验',
+                completionState: '完成',
+                address: '济事楼003',
+                teacherId: '',
+                reportScore: null,
+                tag: 'Home',
+              },)
+              this.tableData[i].assistantId=resp.data[i].assistantId
+              this.tableData[i].reportId=resp.data[i].reportId
+              if (resp.data[i].reportScore==null){
+                this.tableData[i].reportScore='NaN'
+              }
+              else{
                 this.tableData[i].reportScore=resp.data[i].reportScore
               }
+              this.tableData[i].studentId=resp.data[i].studentId
               this.tableData[i].teacherId=resp.data[i].teacherId
+
             }
           })
           .catch(failResponse => {

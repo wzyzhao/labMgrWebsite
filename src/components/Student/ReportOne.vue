@@ -844,7 +844,7 @@ export default {
 
           }).then(resp => {
         /*then 指成功之后的回调 (注意：使用箭头函数，可以不考虑this指向)*/
-
+        window.alert(localStorage.getItem('reportId'))
         let result = resp.data;
         console.log(resp);
         console.log(result);
