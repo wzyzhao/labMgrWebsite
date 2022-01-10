@@ -12,8 +12,8 @@
         <div style="padding: 20px">
           <span>软件工程经济学</span>
           <el-result
-              icon="success"
-              title="课程进行中"
+              icon="info"
+              title="请选择操作"
               sub-title="Please follow the instructions"
           >
 
@@ -39,8 +39,8 @@
         <div style="padding: 20px">
           <span>软件工程</span>
           <el-result
-              icon="success"
-              title="课程进行中"
+              icon="info"
+              title="请选择操作"
               sub-title="Please follow the instructions"
           >
 
@@ -66,8 +66,8 @@
         <div style="padding: 20px">
           <span>计算机组成原理实验</span>
           <el-result
-              icon="error"
-              title="课程未开启"
+              icon="info"
+              title="请选择操作"
               sub-title="Please follow the instructions"
           >
           </el-result>
