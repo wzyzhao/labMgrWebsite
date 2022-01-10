@@ -106,7 +106,7 @@ export default {
                   this.$router.push({path: '/assistant'});
                   break;
                 case "5":
-                  localStorage.setItem('adminId',resp.data.user.id.toString())
+                  //localStorage.setItem('adminId',resp.data.user.id.toString())
                   this.$router.push({path: '/admin'});
                   break;
               }

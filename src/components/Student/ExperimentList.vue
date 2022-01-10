@@ -130,7 +130,7 @@ export default {
             console.log(111)
             //console.log(resp.data)
 
-            for (let i=0;i<4;i++) {
+            for (let i=0;i<resp.data.toString();i++) {
               this.tableData[i].reportId=resp.data[i].reportId
               if (this.tableData[i].reportScore==null) {
                 this.tableData[i].reportScore='未批阅'
